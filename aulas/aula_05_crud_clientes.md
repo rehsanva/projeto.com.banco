@@ -41,12 +41,12 @@ Se você mandar o código para o GitHub, qualquer pessoa verá a senha.
 O arquivo `.env` guarda essas informações separadas do código.
 O `.gitignore` já está configurado para não mandar esse arquivo pro GitHub.
 
-lembrando que como você sempre vai perder esse arquivo quando sair no laboratório da ETEC, o ideal é que você tenha ele num drive pessoal, ou pen drive.
+lembrando que como você sempre vai perder esse arquivo quando sair no laboratório da ETEC, o ideal é que você tenha ele num driu pen drive.
 
 ### Criando o .env
 
 Crie um arquivo chamado `.env` dentro da pasta `backend/`:
-
+ve pessoal, o
 ```
 DB_HOST=localhost
 DB_USER=root
@@ -157,9 +157,9 @@ def listar_clientes():
     conn = conectar()                        # abre conexão
     cursor = conn.cursor(dictionary=True)    # retorna dicionários em vez de tuplas
     cursor.execute("SELECT * FROM cliente")  # executa o SELECT
-    clientes = cursor.fetchall()             # pega todos os resultados
+    cliente = cursor.fetchall()             # pega todos os resultados
     conn.close()                             # fecha a conexão
-    return clientes                          # retorna a lista em JSON
+    return cliente                         # retorna a lista em JSON
 ```
 
 **Teste:** acesse `http://127.0.0.1:8000/clientes` no navegador.
@@ -195,7 +195,7 @@ def buscar_cliente(id: int):
 
 Antes da rota, adicione o **modelo de dados** logo após o `router = APIRouter()`:
 
-```python
+
 # Modelo de dados — define os campos que o cliente deve ter
 class Cliente(BaseModel):
     nome: str                           # obrigatório

@@ -1,6 +1,6 @@
 from fastapi import FastAPI  # importa o FastAPI
 
-app = FastAPI()              # cria a aplicação
+app.include_router(clientes.router)  # registra as rotas de clientes na API
 
 
 @app.get("/")                # define que essa função responde ao endereço "/"

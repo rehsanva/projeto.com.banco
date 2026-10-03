@@ -304,7 +304,7 @@ async function listarAgendamentos() {
 listarAgendamentos()   // essa linha já existia — confira se ela continua aqui depois de colar a função acima
 ```
 
-**Teste:** recarregue `agendamentos.html` (sem cadastrar nada antes) e confirme que a tabela já aparece preenchida sozinha. Se ela aparecer vazia até você cadastrar/editar/excluir alguma coisa, é sinal de que a linha `listarAgendamentos()` acima se perdeu na hora de colar. O agendamento com imagem deve mostrar uma miniatura na tabela, e os outros "-".
+**Teste:** recarregue `agendamentos.html` (sem cadastrar nada antes) e confirme que a tabela já aparece preenchida sozinha. Se ela aparecer vazia até você cadastrr alguma coisa, é sinal de que a linha `listarAgendamentos()` acima se perdeu na hora de colar. O agendamento com imagem deve mostrar uma miniatura na tabela, e os outros "-".
 
 ---
 
@@ -312,7 +312,7 @@ listarAgendamentos()   // essa linha já existia — confira se ela continua aqu
 
 - **`{"detail":"Method Not Allowed"}` ao acessar `/agendamentos`, ou a tabela nunca lista nada:** provavelmente a rota `GET /agendamentos` sumiu na Parte 4 — confira se ela ainda existe em `rotas/agendamentos.py` e se não ficaram duas cópias do `POST /agendamentos` (aconteceu de colar a função nova do `criar_agendamento` do lado da antiga, em vez de substituir, empurrando o `GET` pra fora sem querer).
 - **A imagem não é enviada, sem erro nenhum:** confira se o `formData.append('arquivo', ...)` usa exatamente o mesmo nome (`arquivo`) do parâmetro da rota (`arquivo: UploadFile = File(...)`). Nomes diferentes fazem o FastAPI não encontrar o arquivo.
-- **Erro estranho de `Content-Type` ou o backend não reconhece o arquivo:** confira se você **não** colocou `headers: { 'Content-Type': ... }` na chamada que envia o `FormData`. O navegador precisa definir esse cabeçalho sozinho (ele inclui um "boundary" que identifica onde cada parte do arquivo começa e termina).
+- **Erro estranho de `Content-Type` ou o backend não reconhece o arquivo:** confira se você **não** colocou `headers: { 'Car/editar/excluiontent-Type': ... }` na chamada que envia o `FormData`. O navegador precisa definir esse cabeçalho sozinho (ele inclui um "boundary" que identifica onde cada parte do arquivo começa e termina).
 - **Erro ao iniciar o servidor sobre a pasta `uploads`:** confira se a linha `os.makedirs("uploads", exist_ok=True)` está antes do `app.mount(...)` no `main.py`. Sem ela, o `StaticFiles` reclama se a pasta ainda não existir.
 - **A miniatura não aparece na tabela:** abra a URL da imagem direto no navegador (algo como `http://127.0.0.1:8000/uploads/3_desenho.jpg`) pra confirmar se o arquivo foi salvo com esse nome exato.
 - **`RuntimeError: Form data requires "python-multipart" to be installed`** (a API não sobe, ou fica reiniciando sem parar): faltou instalar essa biblioteca — veja a Parte 3, é o primeiro passo antes do código.

@@ -29,7 +29,7 @@ class EstilosDoTatuador(BaseModel):
     idestilos: List[int]
 
 # GET /tatuadores — lista todos os tatuadores, já com senioridade e estilos
-@router.get("/tatuadores")
+@router.get("")
 def listar_tatuadores():
     conn = conectar()
     cursor = conn.cursor(dictionary=True)
@@ -47,7 +47,7 @@ def listar_tatuadores():
     return tatuadores
 
 # GET /tatuadores/{id} — busca um tatuador pelo ID
-@router.get("/tatuadores/{id}")
+@router.get("/{id}")
 def buscar_tatuador(id: int):
     conn = conectar()
     cursor = conn.cursor(dictionary=True)
@@ -59,7 +59,7 @@ def buscar_tatuador(id: int):
     return tatuador
 
 # POST /tatuadores — cadastra um novo tatuador
-@router.post("/tatuadores")
+@router.post("")
 def criar_tatuador(tatuador: Tatuador):
     conn = conectar()
     cursor = conn.cursor()
@@ -75,7 +75,7 @@ def criar_tatuador(tatuador: Tatuador):
     return {"mensagem": "Tatuador cadastrado com sucesso", "idtatuador": novo_id}
 
 # PUT /tatuadores/{id} — atualiza um tatuador existente
-@router.put("/tatuadores/{id}")
+@router.put("/{id}")
 def atualizar_tatuador(id: int, tatuador: Tatuador):
     conn = conectar()
     cursor = conn.cursor()
@@ -91,7 +91,7 @@ def atualizar_tatuador(id: int, tatuador: Tatuador):
     return {"mensagem": "Tatuador atualizado com sucesso"}
 
 # DELETE /tatuadores/{id} — deleta um tatuador
-@router.delete("/tatuadores/{id}")
+@router.delete("/{id}")
 def deletar_tatuador(id: int):
     conn = conectar()
     cursor = conn.cursor()
@@ -107,7 +107,7 @@ def deletar_tatuador(id: int):
         return {"erro": "Não foi possível excluir este tatuador. Verifique se ele possui agendamentos ou estilos cadastrados."}
 
 # GET /tatuadores/{id}/estilos — lista os estilos que esse tatuador já domina
-@router.get("/tatuadores/{id}/estilos")
+@router.get("/{id}/estilos")
 def listar_estilos_do_tatuador(id: int):
     conn = conectar()
     cursor = conn.cursor(dictionary=True)
@@ -122,7 +122,7 @@ def listar_estilos_do_tatuador(id: int):
     return estilos
 
 # PUT /tatuadores/{id}/estilos — substitui a lista de estilos desse tatuador
-@router.put("/tatuadores/{id}/estilos")
+@router.put("/{id}/estilos")
 def atualizar_estilos_do_tatuador(id: int, dados: EstilosDoTatuador):
     conn = conectar()
     cursor = conn.cursor()

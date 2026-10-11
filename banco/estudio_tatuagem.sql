@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02/10/2026 às 21:04
+-- Tempo de geração: 09/10/2026 às 21:19
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,11 +93,7 @@ INSERT INTO `estilo` (`idestilo`, `descricao`) VALUES
 (1, 'Blackwork'),
 (2, 'Aquarela'),
 (3, 'Realismo'),
-(4, 'Old School'),
-(5, 'Blackwork'),
-(6, 'Aquarela'),
-(7, 'Realismo'),
-(8, 'Old School');
+(4, 'Old School');
 
 -- --------------------------------------------------------
 
@@ -142,7 +138,8 @@ CREATE TABLE `tatuador` (
 INSERT INTO `tatuador` (`idtatuador`, `nometatuador`, `cpf`, `email`, `telefone`, `datacontratacao`, `idsenioridade`) VALUES
 (1, 'Lucas Mendes', '11111111111', 'lucas@estudio.com', '11999990001', '2020-03-01', 3),
 (2, 'Carla Souza', '22222222222', 'carla@estudio.com', '11999990002', '2026-10-02', 2),
-(3, 'Pedro Lima', '33333333333', 'pedro@estudio.com', '11999990003', '2024-01-10', 1);
+(3, 'Pedro Lima', '33333333333', 'pedro@estudio.com', '11999990003', '2024-01-10', 1),
+(7, 'SSSD', '465678788', 'RDSAFSE@GMAIL.COM', 'DF636874', '2026-10-09', 1);
 
 -- --------------------------------------------------------
 
@@ -164,7 +161,30 @@ INSERT INTO `tatuador_estilo` (`idtatuador`, `idestilo`, `dataestilo`) VALUES
 (1, 1, '2020-03-01'),
 (1, 3, '2021-05-10'),
 (2, 2, '2022-06-15'),
-(3, 4, '2024-01-10');
+(3, 4, '2024-01-10'),
+(7, 4, '2026-10-09');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idusuario` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `tipo` enum('admin','funcionario','cliente') NOT NULL DEFAULT 'funcionario',
+  `idcliente` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`idusuario`, `nome`, `email`, `senha`, `tipo`, `idcliente`) VALUES
+(1, 'Rebeca Santos Silva', 'rebeca.sanva@gmail.com', '$2b$12$L.PIGvhXUQgdso4a7s4BfuTHMeFBrlSJDRkGEkY5ipjtbX7uj2kdy', 'funcionario', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -213,6 +233,14 @@ ALTER TABLE `tatuador_estilo`
   ADD KEY `idestilo` (`idestilo`);
 
 --
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusuario`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `idcliente` (`idcliente`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -244,7 +272,13 @@ ALTER TABLE `senioridade`
 -- AUTO_INCREMENT de tabela `tatuador`
 --
 ALTER TABLE `tatuador`
-  MODIFY `idtatuador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idtatuador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para tabelas despejadas
@@ -269,6 +303,12 @@ ALTER TABLE `tatuador`
 ALTER TABLE `tatuador_estilo`
   ADD CONSTRAINT `tatuador_estilo_ibfk_1` FOREIGN KEY (`idtatuador`) REFERENCES `tatuador` (`idtatuador`),
   ADD CONSTRAINT `tatuador_estilo_ibfk_2` FOREIGN KEY (`idestilo`) REFERENCES `estilo` (`idestilo`);
+
+--
+-- Restrições para tabelas `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

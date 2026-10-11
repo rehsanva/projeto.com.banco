@@ -1,5 +1,6 @@
 // endereço da nossa API backend
 const API = 'http://127.0.0.1:8000'
+protegerPagina()   // bloqueia a página se não tiver login
 
 // elementos do formulário e do botão de enviar
 const formTatuador = document.getElementById('form-tatuador')
@@ -16,7 +17,7 @@ function limparFormulario() {
 
 // ─── Busca as senioridades na API e preenche o <select> ───
 async function carregarSenioridades() {
-  const resposta = await fetch(`${API}/senioridade`)
+  const resposta = await fetchAutenticado(`${API}/senioridade`)
   const senioridades = await resposta.json()
 
   const select = document.getElementById('idsenioridade')
@@ -31,7 +32,7 @@ carregarSenioridades()
 
 // ─── Carrega a lista de tatuadores ao abrir a página ───
 async function listarTatuadores() {
-  const resposta = await fetch(`${API}/tatuadores`)
+  const resposta = await fetchAutenticado(`${API}/tatuadores`)
   const tatuadores = await resposta.json()
 
   const corpo = document.getElementById('corpo-tabela')
@@ -75,7 +76,7 @@ formTatuador.addEventListener('submit', async (e) => {
 
   // ─── Edita um tatuador existente ───
   if (idTatuador) {
-    await fetch(`${API}/tatuadores/${idTatuador}`, {
+    await fetchAutenticado(`${API}/tatuadores/${idTatuador}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -85,7 +86,7 @@ formTatuador.addEventListener('submit', async (e) => {
 
   // ─── Cadastra um novo tatuador ───
   } else {
-    const resposta = await fetch(`${API}/tatuadores`, {
+    const resposta = await fetchAutenticado(`${API}/tatuadores`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -105,7 +106,7 @@ formTatuador.addEventListener('submit', async (e) => {
   ).map(checkbox => Number(checkbox.value))
 
   // ─── Salva os estilos do tatuador ───
-  await fetch(`${API}/tatuadores/${idParaEstilos}/estilos`, {
+  await fetchAutenticado(`${API}/tatuadores/${idParaEstilos}/estilos`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -135,7 +136,7 @@ async function preencherFormularioEdicao(tatuador) {
   })
 
   // busca os estilos daquele tatuador
-  const resposta = await fetch(
+  const resposta = await fetchAutenticado(
     `${API}/tatuadores/${tatuador.idtatuador}/estilos`
   )
 
@@ -159,7 +160,7 @@ async function preencherFormularioEdicao(tatuador) {
 async function deletarTatuador(id) {
   if (!confirm('Tem certeza que deseja excluir este tatuador?')) return
 
-  await fetch(`${API}/tatuadores/${id}`, {
+  await fetchAutenticado(`${API}/tatuadores/${id}`, {
     method: 'DELETE'
   })
 
@@ -168,7 +169,7 @@ async function deletarTatuador(id) {
 
 // ─── Busca os estilos na API e monta os checkboxes ───
 async function carregarEstilos() {
-  const resposta = await fetch(`${API}/estilos`)
+  const resposta = await fetchAutenticado(`${API}/estilos`)
   const estilos = await resposta.json()
 
   const lista = document.getElementById('lista-estilos')

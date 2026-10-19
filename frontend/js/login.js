@@ -1,27 +1,64 @@
+
 const API = 'http://127.0.0.1:8000'
-protegerPagina()   // bloqueia a página se não tiver login
+
 const formLogin = document.getElementById('form-login')
+const botaoLogin = formLogin.querySelector('button[type="submit"]')
 
 formLogin.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   const dados = {
-    email: document.getElementById('email').value,
+    email: document.getElementById('email').value.trim(),
     senha: document.getElementById('senha').value
   }
 
-  const resposta = await fetch(`${API}/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados)
-  })
+  botaoLogin.disabled = true
+  botaoLogin.textContent = 'Entrando...'
 
-  const resultado = await resposta.json()
+  try {
+    const resposta = await fetch(`${API}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    })
 
-  if (resposta.ok) {
-    localStorage.setItem('token', resultado.access_token)   // guarda o token na "gaveta"
-    window.location.href = 'dashboard.html'
-  } else {
-    alert('Erro ao entrar: ' + resultado.erro)
+    const resultado = await resposta.json()
+
+    console.log('Status do login:', resposta.status)
+    console.log('Resposta da API:', resultado)
+
+    if (
+      resposta.ok &&
+      resultado.access_token &&
+      resultado.token_type
+    ) {
+      localStorage.setItem('token', resultado.access_token)
+
+      // Só redireciona depois de confirmar que recebeu o token.
+      window.location.href = 'dashboard.html'
+      return
+    }
+
+    const mensagem =
+      resultado.detail ||
+      resultado.erro ||
+      'A API não retornou um token de acesso válido.'
+
+    alert('Não foi possível entrar: ' + mensagem)
+
+  } catch (erro) {
+    console.error('Erro durante o login:', erro)
+
+    alert(
+      'Não foi possível conectar à API. ' +
+      'Confira se o FastAPI está funcionando.'
+    )
+  } finally {
+    botaoLogin.disabled = false
+    botaoLogin.innerHTML =
+      'Entrar na sua conta <span aria-hidden="true">↗</span>'
   }
 })

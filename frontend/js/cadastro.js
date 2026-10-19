@@ -1,29 +1,50 @@
+
 const API = 'http://127.0.0.1:8000'
-protegerPagina()   // bloqueia a página se não tiver login
+
 const formCadastro = document.getElementById('form-cadastro')
 
 formCadastro.addEventListener('submit', async (e) => {
   e.preventDefault()
 
+  // Captura os dados preenchidos no formulário
   const usuario = {
-    nome: document.getElementById('nome').value,
-    email: document.getElementById('email').value,
+    nome: document.getElementById('nome').value.trim(),
+    email: document.getElementById('email').value.trim(),
     senha: document.getElementById('senha').value
   }
 
-  const resposta = await fetchAutenticado(`${API}/usuarios`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(usuario)
-  })
+  try {
+    // Envia o cadastro para a API sem token
+    const resposta = await fetch(`${API}/usuarios`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(usuario)
+    })
 
-  if (resposta.ok) {
-    alert('Cadastro feito com sucesso!')
-    window.location.href = 'index.html'
-    // manda pra Landing Page por enquanto — a tela de login de verdade
-    // só vai existir a partir da Aula 15
-  } else {
-    const erro = await resposta.json()
-    alert('Erro ao cadastrar: ' + JSON.stringify(erro))
+    // Lê a resposta da API
+    const resultado = await resposta.json()
+
+    if (resposta.ok && resultado.mensagem) {
+      alert('Cadastro feito com sucesso!')
+      formCadastro.reset()
+      window.location.href = 'login.html'
+    } else {
+      const mensagem =
+        resultado.detail ||
+        resultado.erro ||
+        'Não foi possível realizar o cadastro.'
+
+      alert('Erro ao cadastrar: ' + mensagem)
+      console.error('Resposta da API:', resultado)
+    }
+  } catch (erro) {
+    console.error('Erro ao conectar com a API:', erro)
+
+    alert(
+      'Não foi possível conectar ao servidor. ' +
+      'Verifique se a API FastAPI está em execução.'
+    )
   }
 })

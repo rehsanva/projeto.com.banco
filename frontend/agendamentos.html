@@ -1,99 +1,607 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
-  <title>Agendamentos — Estúdio de Tatuagem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamentos — AKEMI STUDIO</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #111110;
+      --panel: #191917;
+      --panel-hover: #22221f;
+      --border: #34332e;
+      --text: #eee9df;
+      --muted: #aaa49a;
+      --accent: #8f3935;
+      --accent-light: #bc6258;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 85% 0%, rgba(143, 57, 53, 0.09), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .navbar {
+      background: rgba(17, 17, 16, 0.96) !important;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      margin-bottom: 48px;
+    }
+
+    .navbar .container {
+      max-width: 1250px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      color: var(--text) !important;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .brand-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-right: 9px;
+      background: var(--accent);
+      color: white;
+      font-family: serif;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.84rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .btn-exit {
+      padding: 6px 13px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .btn-exit:hover {
+      border-color: var(--accent-light);
+      background: rgba(143, 57, 53, 0.12);
+      color: var(--text);
+    }
+
+    main.container {
+      max-width: 1250px;
+      padding-bottom: 55px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--accent-light);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 25px;
+      height: 1px;
+      background: var(--accent-light);
+      content: '';
+    }
+
+    h1,
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      letter-spacing: -1px;
+    }
+
+    .page-description {
+      margin-bottom: 38px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .content-panel {
+      padding: 28px;
+      margin-bottom: 26px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      transition: border-color 0.25s ease;
+    }
+
+    .content-panel:hover {
+      border-color: #4a3935;
+    }
+
+    .section-heading {
+      margin-bottom: 7px;
+      font-size: 1.35rem;
+    }
+
+    .section-description {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .form-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .form-control,
+    .form-select {
+      min-height: 46px;
+      padding: 12px 14px;
+      background-color: #121211;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      font-size: 0.88rem;
+    }
+
+    .form-control::placeholder {
+      color: #77736b;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      background-color: #121211;
+      border-color: var(--accent-light);
+      color: var(--text);
+      box-shadow: 0 0 0 3px rgba(143, 57, 53, 0.15);
+    }
+
+    .form-select option {
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    input[type="date"],
+    input[type="time"],
+    input[type="file"] {
+      color-scheme: dark;
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input[type="file"]::file-selector-button {
+      margin: -5px 12px -5px -5px;
+      padding: 7px 10px;
+      background: #292824;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text);
+    }
+
+    .btn-akemi {
+      min-height: 46px;
+      padding: 11px 22px;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-akemi:hover {
+      transform: translateY(-1px);
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+      color: white;
+    }
+
+    .btn-save-edit {
+      background: #326b50;
+      border-color: #326b50;
+    }
+
+    .btn-save-edit:hover {
+      background: #3e8261;
+      border-color: #3e8261;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 330px;
+    }
+
+    .search-wrapper .form-control {
+      min-height: 42px;
+      padding-left: 38px;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 13px;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .table-responsive {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .table {
+      margin-bottom: 0;
+      vertical-align: middle;
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--text);
+      --bs-table-border-color: var(--border);
+      --bs-table-hover-bg: var(--panel-hover);
+      --bs-table-hover-color: var(--text);
+    }
+
+    .table thead th {
+      padding: 16px;
+      background: #20201d;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .table tbody td {
+      padding: 15px 16px;
+      border-color: var(--border);
+      font-size: 0.84rem;
+    }
+
+    .table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    #corpo-tabela td:first-child {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .table .btn {
+      margin: 2px;
+      border-radius: 3px;
+      font-size: 0.77rem;
+      white-space: nowrap;
+    }
+
+    .table .btn-warning {
+      background: #b58b42;
+      border-color: #b58b42;
+      color: #17140e;
+    }
+
+    .table .btn-danger {
+      background: #8f3935;
+      border-color: #8f3935;
+    }
+
+    .table .btn-danger:hover {
+      background: #bc6258;
+      border-color: #bc6258;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+
+    .status-pendente {
+      background: rgba(181, 139, 66, 0.12);
+      border-color: rgba(181, 139, 66, 0.4);
+      color: #dfbb77;
+    }
+
+    .status-confirmado {
+      background: rgba(62, 130, 97, 0.12);
+      border-color: rgba(62, 130, 97, 0.4);
+      color: #8dc6a5;
+    }
+
+    .status-concluido {
+      background: rgba(120, 120, 120, 0.12);
+      border-color: #50504a;
+      color: #d0cbc1;
+    }
+
+    .status-cancelado {
+      background: rgba(143, 57, 53, 0.15);
+      border-color: rgba(143, 57, 53, 0.5);
+      color: #e28a81;
+    }
+
+    footer {
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        margin-bottom: 30px;
+      }
+
+      .navbar .container {
+        gap: 18px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .content-panel {
+        padding: 20px;
+      }
+
+      .search-wrapper {
+        max-width: 100%;
+      }
+
+      .table thead th,
+      .table tbody td {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
-<body class="container py-4">
+<body>
 
-  <nav class="navbar navbar-dark bg-dark mb-4">
+  <nav class="navbar">
     <div class="container">
-      <span class="navbar-brand">Estúdio de Tatuagem</span>
-      <div>
-        <a href="clientes.html" class="text-light me-3">Clientes</a>
-        <a href="senioridade.html" class="text-light me-3">Senioridade</a>
-        <a href="estilos.html" class="text-light me-3">Estilos</a>
-        <a href="tatuadores.html" class="text-light me-3">Tatuadores</a>
-        <a href="agendamentos.html" class="text-light me-3">Agendamentos</a>
-        <button onclick="sair()" class="btn btn-outline-light btn-sm">Sair</button>
+      <a class="navbar-brand" href="clientes.html">
+        <span class="brand-symbol">朱</span>AKEMI STUDIO.
+      </a>
+
+      <div class="nav-links">
+        <a href="clientes.html">Clientes</a>
+        <a href="senioridade.html">Senioridade</a>
+        <a href="estilos.html">Estilos</a>
+        <a href="tatuadores.html">Tatuadores</a>
+        <a href="agendamentos.html" class="active">Agendamentos</a>
+        <button onclick="sair()" class="btn btn-exit">Sair ↗</button>
       </div>
     </div>
   </nav>
 
-  <h1>Agendamentos</h1>
+  <main class="container">
 
-  <!-- Formulário para cadastrar novo agendamento -->
-  <form id="form-agendamento" class="row g-2 mt-2 mb-4">
-    <div class="col-md-3">
-      <select id="idcliente" class="form-select" required>
-        <option value="">Cliente...</option>
-      </select>
-    </div>
-    <div class="col-md-3">
-      <select id="idtatuador" class="form-select" required>
-        <option value="">Tatuador...</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <input type="date" id="dataagendamento" class="form-control" required>
-    </div>
-    <div class="col-md-2">
-      <input type="time" id="horaagendamento" class="form-control" required>
-    </div>
-    <div class="col-md-2">
-      <input type="number" id="valortatuagem" class="form-control" placeholder="Valor (R$)" step="0.01" min="0">
-    </div>
-    <div class="col-md-12">
-      <textarea id="descricaotatuagem" class="form-control" placeholder="Descrição da tatuagem"></textarea>
-    </div>
+    <div class="eyebrow">Organização do estúdio</div>
+    <h1>Agendamentos</h1>
+    <p class="page-description">
+      Organize sessões, acompanhe os horários e gerencie os desenhos aprovados.
+    </p>
 
-    <div class="col-md-4">
-      <label class="form-label">Desenho aprovado (imagem)</label>
-      <input type="file" id="desenho" class="form-control" accept="image/*">
-    </div>
+    <section class="content-panel">
+      <h2 class="section-heading">Novo agendamento</h2>
+      <p class="section-description">
+        Defina o cliente, o tatuador e os detalhes da sessão.
+      </p>
 
-    <!-- Esse bloco começa escondido — só aparece quando estamos editando um agendamento existente -->
-    <div class="col-md-3" id="bloco-status" style="display: none;">
-      <select id="status" class="form-select">
-        <option value="pendente">Pendente</option>
-        <option value="confirmado">Confirmado</option>
-        <option value="concluido">Concluído</option>
-        <option value="cancelado">Cancelado</option>
-      </select>
-    </div>
+      <form id="form-agendamento" class="row g-3 align-items-end">
 
-    <div class="col-md-2">
-      <button id="btn-submit-agendamento" type="submit" class="btn btn-primary w-100">Cadastrar</button>
-    </div>
-  </form>
+        <div class="col-md-6 col-lg-3">
+          <label for="idcliente" class="form-label">Cliente</label>
+          <select id="idcliente" class="form-select" required>
+            <option value="">Selecione um cliente...</option>
+          </select>
+        </div>
 
-  <!-- Tabela onde os agendamentos vão aparecer -->
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Tatuador</th>
-        <th>Data</th>
-        <th>Hora</th>
-        <th>Valor</th>
-        <th>Status</th>
-        <th>Desenho</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="corpo-tabela">
-      <!-- os agendamentos vão aparecer aqui -->
-    </tbody>
-  </table>
+        <div class="col-md-6 col-lg-3">
+          <label for="idtatuador" class="form-label">Tatuador</label>
+          <select id="idtatuador" class="form-select" required>
+            <option value="">Selecione um tatuador...</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 col-lg-2">
+          <label for="dataagendamento" class="form-label">Data</label>
+          <input type="date" id="dataagendamento" class="form-control" required>
+        </div>
+
+        <div class="col-md-6 col-lg-2">
+          <label for="horaagendamento" class="form-label">Horário</label>
+          <input type="time" id="horaagendamento" class="form-control" required>
+        </div>
+
+        <div class="col-md-6 col-lg-2">
+          <label for="valortatuagem" class="form-label">Valor (R$)</label>
+          <input
+            type="number"
+            id="valortatuagem"
+            class="form-control"
+            placeholder="0,00"
+            step="0.01"
+            min="0"
+          >
+        </div>
+
+        <div class="col-12">
+          <label for="descricaotatuagem" class="form-label">Descrição da tatuagem</label>
+          <textarea
+            id="descricaotatuagem"
+            class="form-control"
+            placeholder="Descreva a ideia, o tamanho, a região do corpo ou outras observações..."
+          ></textarea>
+        </div>
+
+        <div class="col-md-8" id="campo-desenho">
+          <label for="desenho" class="form-label">Desenho aprovado</label>
+          <input
+            type="file"
+            id="desenho"
+            class="form-control"
+            accept="image/*"
+          >
+          <small class="d-block mt-2" style="color: var(--muted);">
+            Selecione uma imagem de referência ou do desenho aprovado.
+          </small>
+        </div>
+
+        <div class="col-md-4" id="bloco-status" style="display: none;">
+          <label for="status" class="form-label">Status do agendamento</label>
+          <select id="status" class="form-select">
+            <option value="pendente">Pendente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="concluido">Concluído</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <div class="col-12 d-flex flex-wrap gap-2 mt-4">
+          <button id="btn-submit-agendamento" type="submit" class="btn btn-akemi">
+            Cadastrar agendamento
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <section class="content-panel">
+
+      <div class="d-flex justify-content-between align-items-md-center flex-column flex-md-row gap-3 mb-4">
+        <div>
+          <h2 class="section-heading">Agenda do estúdio</h2>
+          <p class="section-description mb-0">
+            Consulte e gerencie os agendamentos registrados.
+          </p>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="buscarAgendamento"
+            class="form-control"
+            placeholder="Buscar agendamento..."
+            aria-label="Buscar agendamento"
+          >
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Tatuador</th>
+              <th scope="col">Data</th>
+              <th scope="col">Hora</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Status</th>
+              <th scope="col">Desenho</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="corpo-tabela">
+            <!-- Os agendamentos são carregados pelo JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <footer class="d-flex justify-content-between flex-wrap gap-2">
+      <span>AKEMI STUDIO. — Gestão do estúdio</span>
+      <span id="anoAtual"></span>
+    </footer>
+
+  </main>
 
   <script src="js/auth.js"></script>
-  <script src="js/clientes.js"></script>
   <script src="js/agendamentos.js"></script>
 
-</body>
+  <script>
+    // Filtra as linhas já carregadas pelo agendamentos.js.
+    const campoBusca = document.getElementById('buscarAgendamento');
 
+    campoBusca.addEventListener('input', function () {
+      const termo = this.value.trim().toLocaleLowerCase('pt-BR');
+
+      document.querySelectorAll('#corpo-tabela tr').forEach(function (linha) {
+        linha.hidden = !linha.textContent
+          .toLocaleLowerCase('pt-BR')
+          .includes(termo);
+      });
+    });
+
+    document.getElementById('anoAtual').textContent =
+      '© ' + new Date().getFullYear();
+  </script>
+
+</body>
 </html>

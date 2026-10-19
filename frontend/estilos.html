@@ -3,53 +3,470 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Estilos — Estúdio de Tatuagem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estilos — AKEMI STUDIO</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #111110;
+      --panel: #191917;
+      --panel-hover: #22221f;
+      --border: #34332e;
+      --text: #eee9df;
+      --muted: #aaa49a;
+      --accent: #8f3935;
+      --accent-light: #bc6258;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 85% 0%, rgba(143, 57, 53, 0.09), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .navbar {
+      background: rgba(17, 17, 16, 0.94) !important;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      margin-bottom: 48px !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar .container {
+      max-width: 1200px;
+    }
+
+    .navbar-brand {
+      color: var(--text) !important;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .brand-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin-right: 9px;
+      background: var(--accent);
+      color: white;
+      font-family: serif;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted) !important;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text) !important;
+    }
+
+    .btn-exit {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      padding: 6px 13px;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-exit:hover {
+      color: var(--text);
+      border-color: var(--accent-light);
+      background: rgba(143, 57, 53, 0.12);
+    }
+
+    main.container {
+      max-width: 1200px;
+      padding-bottom: 60px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-light);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 25px;
+      height: 1px;
+      background: var(--accent-light);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .page-description {
+      color: var(--muted);
+      margin-bottom: 38px;
+      font-size: 0.95rem;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      margin-bottom: 7px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+
+    .content-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 28px;
+      margin-bottom: 26px;
+      transition: border-color 0.25s ease;
+    }
+
+    .content-panel:hover {
+      border-color: #4a3935;
+    }
+
+    .form-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 9px;
+    }
+
+    .form-control {
+      min-height: 46px;
+      background: #121211;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      padding: 12px 14px;
+    }
+
+    .form-control::placeholder {
+      color: #77736b;
+    }
+
+    .form-control:focus {
+      background: #121211;
+      color: var(--text);
+      border-color: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(143, 57, 53, 0.15);
+    }
+
+    .btn-akemi {
+      min-height: 46px;
+      padding: 11px 24px;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-akemi:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 330px;
+    }
+
+    .search-wrapper .form-control {
+      padding-left: 38px;
+      min-height: 42px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .table-responsive {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .table {
+      margin-bottom: 0;
+      color: var(--text);
+      vertical-align: middle;
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--text);
+      --bs-table-border-color: var(--border);
+      --bs-table-hover-bg: var(--panel-hover);
+      --bs-table-hover-color: var(--text);
+    }
+
+    .table thead th {
+      padding: 16px 20px;
+      background: #20201d;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .table tbody td {
+      padding: 17px 20px;
+      border-color: var(--border);
+      font-size: 0.88rem;
+    }
+
+    .table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    #corpo-tabela td:first-child {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    #corpo-tabela td:nth-child(2) {
+      font-weight: 500;
+    }
+
+    .table .btn {
+      font-size: 0.78rem;
+      border-radius: 3px;
+      margin: 2px;
+    }
+
+    .empty-state {
+      padding: 38px 20px !important;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-symbol {
+      display: block;
+      color: var(--accent-light);
+      font-family: serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        margin-bottom: 30px !important;
+      }
+
+      .navbar .container {
+        gap: 18px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .content-panel {
+        padding: 20px;
+      }
+
+      .search-wrapper {
+        max-width: 100%;
+      }
+
+      .table thead th,
+      .table tbody td {
+        padding: 13px 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
-<body class="container py-4">
+<body>
 
-  <nav class="navbar navbar-dark bg-dark mb-4">
+  <nav class="navbar navbar-dark">
     <div class="container">
-      <span class="navbar-brand">Estúdio de Tatuagem</span>
-      <div>
-        <a href="clientes.html" class="text-light me-3">Clientes</a>
-        <a href="senioridade.html" class="text-light me-3">Senioridade</a>
-        <a href="estilos.html" class="text-light me-3">Estilos</a>
-        <a href="tatuadores.html" class="text-light me-3">Tatuadores</a>
-        <a href="agendamentos.html" class="text-light me-3">Agendamentos</a>
-        <button onclick="sair()" class="btn btn-outline-light btn-sm">Sair</button>
+      <a class="navbar-brand" href="clientes.html">
+        <span class="brand-symbol">朱</span>AKEMI STUDIO.
+      </a>
+
+      <div class="nav-links">
+        <a href="clientes.html">Clientes</a>
+        <a href="senioridade.html">Senioridade</a>
+        <a href="estilos.html" class="active">Estilos</a>
+        <a href="tatuadores.html">Tatuadores</a>
+        <a href="agendamentos.html">Agendamentos</a>
+        <button onclick="sair()" class="btn btn-exit">Sair ↗</button>
       </div>
     </div>
   </nav>
 
-  <h1>Estilos</h1>
+  <main class="container">
 
-  <form id="form-estilo" class="row g-2 mt-2 mb-4">
-    <div class="col-md-4">
-      <input type="text" id="descricao" class="form-control" placeholder="Descrição (ex: Blackwork)" required>
-    </div>
-    <div class="col-md-2">
-      <button id="btn-submit-estilo" type="submit" class="btn btn-primary w-100">Cadastrar</button>
-    </div>
-  </form>
+    <div class="eyebrow">Biblioteca do estúdio</div>
+    <h1>Estilos de tatuagem</h1>
+    <p class="page-description">
+      Organize as técnicas e referências que fazem parte da identidade do estúdio.
+    </p>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="corpo-tabela">
-    </tbody>
-  </table>
+    <section class="content-panel">
+      <h2 class="section-heading">Novo estilo</h2>
+      <p class="section-description">
+        Cadastre um estilo para manter seu catálogo organizado.
+      </p>
+
+      <form id="form-estilo" class="row g-3 align-items-end">
+        <div class="col-md-8">
+          <label for="descricao" class="form-label">Nome do estilo</label>
+          <input
+            type="text"
+            id="descricao"
+            class="form-control"
+            placeholder="Ex.: Blackwork, Fine Line, Oriental..."
+            maxlength="100"
+            required
+          >
+        </div>
+
+        <div class="col-md-4">
+          <button id="btn-submit-estilo" type="submit" class="btn btn-akemi w-100">
+            + Cadastrar estilo
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="content-panel">
+      <div class="d-flex justify-content-between align-items-md-center flex-column flex-md-row gap-3 mb-4">
+        <div>
+          <h2 class="section-heading">Catálogo de estilos</h2>
+          <p class="section-description mb-0">
+            Consulte e gerencie os estilos cadastrados.
+          </p>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="buscarEstilo"
+            class="form-control"
+            placeholder="Buscar estilo..."
+            aria-label="Buscar estilo"
+          >
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="corpo-tabela">
+            <!-- Os estilos serão carregados pelo JavaScript. -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="d-flex justify-content-between flex-wrap gap-2">
+      <span>AKEMI STUDIO. — Gestão do estúdio</span>
+      <span id="anoAtual"></span>
+    </footer>
+
+  </main>
 
   <script src="js/auth.js"></script>
-  <script src="js/clientes.js"></script>
   <script src="js/estilos.js"></script>
 
-</body>
+  <script>
+    // Busca os estilos já renderizados na tabela.
+    const campoBusca = document.getElementById('buscarEstilo');
 
+    campoBusca.addEventListener('input', function () {
+      const termo = this.value.trim().toLocaleLowerCase('pt-BR');
+      const linhas = document.querySelectorAll('#corpo-tabela tr');
+
+      linhas.forEach(function (linha) {
+        const corresponde = linha.textContent.toLocaleLowerCase('pt-BR').includes(termo);
+        linha.hidden = !corresponde;
+      });
+    });
+
+    document.getElementById('anoAtual').textContent =
+      '© ' + new Date().getFullYear();
+  </script>
+
+</body>
 </html>

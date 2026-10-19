@@ -160,11 +160,22 @@ async function preencherFormularioEdicao(tatuador) {
 async function deletarTatuador(id) {
   if (!confirm('Tem certeza que deseja excluir este tatuador?')) return
 
-  await fetchAutenticado(`${API}/tatuadores/${id}`, {
-    method: 'DELETE'
-  })
+  try {
+    const resposta = await fetchAutenticado(`${API}/tatuadores/${id}`, {
+      method: 'DELETE'
+    })
 
-  listarTatuadores()
+    if (!resposta.ok) {
+      const erro = await resposta.json().catch(() => ({}))
+      alert(erro.detail || 'Não foi possível excluir o tatuador.')
+      return
+    }
+
+    listarTatuadores()
+  } catch (e) {
+    console.error('Erro ao excluir:', e)
+    alert('Erro de conexão com o servidor.')
+  }
 }
 
 // ─── Busca os estilos na API e monta os checkboxes ───

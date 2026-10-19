@@ -3,8 +3,7 @@
 # Descrição: Endpoints para gerenciar os tatuadores do estúdio.
 #            Cada tatuador pertence a uma senioridade (FK).
 # ============================================================
-
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from database import conectar
@@ -91,20 +90,62 @@ def atualizar_tatuador(id: int, tatuador: Tatuador):
     return {"mensagem": "Tatuador atualizado com sucesso"}
 
 # DELETE /tatuadores/{id} — deleta um tatuador
+
+from fastapi import HTTPException
+
+# DELETE /tatuadores/{id} — exclui um tatuador
 @router.delete("/{id}")
 def deletar_tatuador(id: int):
     conn = conectar()
     cursor = conn.cursor()
 
     try:
-        cursor.execute("DELETE FROM tatuador WHERE idtatuador = %s", (id,))
+                # 1) apaga só os vínculos do tatuador com os estilos (a tabela estilo não é afetada)
+        cursor.execute(
+            "DELETE FROM tatuador_estilo WHERE idtatuador = %s",
+            (id,)
+        )
+
+        # 2) apaga o tatuador
+        cursor.execute(
+            "DELETE FROM tatuador WHERE idtatuador = %s",
+            (id,)
+        )
+        # Verifica se algum registro foi realmente removido
+        if cursor.rowcount == 0:
+            conn.rollback()
+            raise HTTPException(
+                status_code=404,
+                detail="Tatuador não encontrado."
+            )
+
         conn.commit()
-        conn.close()
-        return {"mensagem": "Tatuador deletado com sucesso"}
+
+        return {
+            "mensagem": "Tatuador excluído com sucesso.",
+            "idtatuador": id
+        }
+
+    except HTTPException:
+        raise
+
     except Exception as erro:
         conn.rollback()
+        print(f"Erro ao excluir tatuador {id}: {erro}")
+
+        raise HTTPException(
+            status_code=409,
+            detail=(
+                "Não foi possível excluir o tatuador. "
+                "Verifique se ele possui agendamentos ou outros "
+                "registros vinculados."
+            )
+        )
+
+    finally:
+        cursor.close()
         conn.close()
-        return {"erro": "Não foi possível excluir este tatuador. Verifique se ele possui agendamentos ou estilos cadastrados."}
+
 
 # GET /tatuadores/{id}/estilos — lista os estilos que esse tatuador já domina
 @router.get("/{id}/estilos")

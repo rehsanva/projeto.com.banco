@@ -3,47 +3,323 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard — Estúdio de Tatuagem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — AKEMI STUDIO</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* ========================================
+   AKEMI STUDIO — DASHBOARD
+   ======================================== */
+
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+        :root {
+            --bg: #111110;
+            --panel: #191917;
+            --border: #35312c;
+            --text: #eee9df;
+            --muted: #aaa49a;
+            --red: #8f3935;
+            --red-hover: #a84942;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background:
+                radial-gradient(ellipse at top left, rgba(143, 57, 53, 0.10), transparent 45%),
+                var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        /* Navegação */
+        .navbar {
+            min-height: 88px;
+            padding: 20px 0;
+            background: rgba(17, 17, 16, 0.96) !important;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar .container {
+            max-width: 1440px;
+            padding-right: 48px;
+            padding-left: 48px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text) !important;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .navbar-brand::before {
+            content: '朱';
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            background: var(--red);
+            color: #fff8ef;
+            font-family: serif;
+            font-size: 23px;
+            letter-spacing: 0;
+        }
+
+        /* Botão sair */
+        .navbar .btn-outline-light {
+            padding: 10px 20px;
+            color: var(--text);
+            border-color: var(--border);
+            border-radius: 3px;
+            transition: 0.2s ease;
+        }
+
+        .navbar .btn-outline-light:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: white;
+        }
+
+        /* Conteúdo principal: margens amplas */
+        body>.container {
+            width: calc(100% - 96px);
+            max-width: 1344px;
+            margin: 0 auto;
+            padding: 64px 0 80px;
+        }
+
+        /* Título */
+        body>.container>h1 {
+            margin-bottom: 12px !important;
+            color: var(--text);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 5vw, 4rem);
+            font-weight: 600;
+            letter-spacing: -1.5px;
+        }
+
+        body>.container>h1::after {
+            content: '';
+            display: block;
+            width: 64px;
+            height: 3px;
+            margin-top: 22px;
+            background: var(--red);
+        }
+
+        /* Grade dos cards */
+        .row.g-3 {
+            margin-top: 32px;
+            row-gap: 20px !important;
+        }
+
+        /* Colunas */
+        .row.g-3>div {
+            display: flex;
+        }
+
+        /* Cards de navegação */
+        .row.g-3>div>a {
+            position: relative;
+            display: flex;
+            min-height: 190px;
+            width: 100%;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 28px;
+
+            background: var(--panel);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55rem;
+            font-weight: 600;
+            text-align: left;
+            text-decoration: none;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+        /* Remove as cores padrão do Bootstrap */
+        .row.g-3>div>a.btn-primary,
+        .row.g-3>div>a.btn-secondary {
+            background: var(--panel);
+            border-color: var(--border);
+        }
+
+        /* Seta decorativa */
+        .row.g-3>div>a::after {
+            content: '↗';
+            position: absolute;
+            top: 22px;
+            right: 24px;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        /* Interação */
+        .row.g-3>div>a:hover {
+            background: #201c19;
+            border-color: var(--red);
+            color: #fff8ef;
+            transform: translateY(-4px);
+        }
+
+        .row.g-3>div>a:hover::after {
+            color: #d18479;
+            transform: translate(3px, -3px);
+        }
+
+        .row.g-3>div>a:focus-visible {
+            outline: 2px solid #bc6258;
+            outline-offset: 4px;
+        }
+
+        /* Novo funcionário */
+        body>.col-md-4 {
+            width: calc(100% - 96px);
+            max-width: 1344px;
+            margin: 0 auto 70px;
+            padding: 0;
+        }
+
+        body>.col-md-4>a {
+            display: flex;
+            min-height: 72px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 26px;
+
+            background: transparent !important;
+            color: #d18479 !important;
+            border: 1px solid var(--red) !important;
+            border-radius: 3px;
+
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            text-decoration: none;
+
+            transition: background-color 0.2s ease;
+        }
+
+        body>.col-md-4>a::after {
+            content: '+';
+            font-size: 1.5rem;
+        }
+
+        body>.col-md-4>a:hover {
+            background: rgba(143, 57, 53, 0.13) !important;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .navbar .container {
+                padding-right: 24px;
+                padding-left: 24px;
+            }
+
+            body>.container {
+                width: calc(100% - 48px);
+                padding-top: 42px;
+            }
+
+            .row.g-3>div>a {
+                min-height: 145px;
+                padding: 22px;
+                font-size: 1.35rem;
+            }
+
+            body>.col-md-4 {
+                width: calc(100% - 48px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+
+            body>.container>h1 {
+                font-size: 2.5rem;
+            }
+
+            .row.g-3>div>a {
+                min-height: 120px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-dark mb-4">
         <div class="container">
-            <span class="navbar-brand">Estúdio de Tatuagem</span>
-            <button onclick="sair()" class="btn btn-outline-light btn-sm">Sair</button>
+            <span class="navbar-brand">AKEMI STUDIO.</span>
+            <button onclick="sair()" class="btn btn-outline-light btn-sm">Sair ↗</button>
         </div>
     </nav>
 
-    <div class="container">
-        <h1 class="mb-4">Painel</h1>
+    <main class="container">
+        <h1>Painel</h1>
+
+        <p style="color: var(--muted); margin-top: 18px;">
+            Gerencie os clientes, a equipe e a agenda do estúdio.
+        </p>
+
         <div class="row g-3">
+
             <div class="col-md-4">
                 <a href="clientes.html" class="btn btn-primary w-100 py-3">Clientes</a>
             </div>
+
             <div class="col-md-4">
                 <a href="tatuadores.html" class="btn btn-primary w-100 py-3">Tatuadores</a>
             </div>
+
             <div class="col-md-4">
                 <a href="agendamentos.html" class="btn btn-primary w-100 py-3">Agendamentos</a>
             </div>
+
             <div class="col-md-4">
                 <a href="senioridade.html" class="btn btn-secondary w-100 py-3">Senioridade</a>
             </div>
+
             <div class="col-md-4">
                 <a href="estilos.html" class="btn btn-secondary w-100 py-3">Estilos</a>
             </div>
-        </div>
-    </div>
 
-    <div class="col-md-4">
-        <a href="cadastro.html" class="btn btn-secondary w-100 py-3">Novo Funcionário</a>
-    </div>
+            <div class="col-md-4">
+                <a href="cadastro.html" class="btn btn-secondary w-100 py-3">Novo funcionário</a>
+            </div>
+
+        </div>
+    </main>
 
     <script src="js/auth.js"></script>
     <script>
-        protegerPagina()   // o dashboard também é protegido — sem login, não entra
+        protegerPagina();
     </script>
 
 </body>

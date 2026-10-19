@@ -1,1455 +1,1241 @@
-```html
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>AKEMI STUDIO | Arte que marca</title>
-
-  <meta
-    name="description"
-    content="AKEMI STUDIO — estúdio de tatuagem. Arte, identidade e expressão em cada traço."
-  >
-
-  <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
-
-  <!-- Fontes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    /* =====================================
-       AKEMI STUDIO — DARK JAPANESE THEME
-    ===================================== */
-
-    :root {
-      --bg: #090909;
-      --bg-secondary: #111010;
-      --bg-card: #171414;
-      --red: #a20f26;
-      --red-light: #d51d3c;
-      --red-dark: #570b18;
-      --white: #f3eeee;
-      --muted: #a69b9b;
-      --border: rgba(255, 255, 255, 0.10);
-      --font-title: 'Cinzel', serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--font-body);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    section {
-      padding: 100px 0;
-      scroll-margin-top: 80px;
-    }
-
-    .container {
-      max-width: 1180px;
-    }
-
-    .text-red {
-      color: var(--red-light);
-    }
-
-    .section-label {
-      color: var(--red-light);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      display: inline-block;
-    }
-
-    .section-title {
-      font-family: var(--font-title);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 650px;
-      margin: 0 auto;
-      font-size: 0.98rem;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 55px;
-    }
-
-    /* BOTÕES */
-
-    .btn-akemi {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 25px;
-      background: var(--red);
-      color: white;
-      border: 1px solid var(--red);
-      border-radius: 2px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: 0.3s ease;
-    }
-
-    .btn-akemi:hover {
-      background: var(--red-light);
-      border-color: var(--red-light);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(162, 15, 38, 0.25);
-    }
-
-    .btn-outline-akemi {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 25px;
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 2px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: 0.3s ease;
-    }
-
-    .btn-outline-akemi:hover {
-      background: white;
-      color: #111;
-      border-color: white;
-    }
-
-    /* NAVEGAÇÃO */
-
-    .navbar {
-      background: rgba(9, 9, 9, 0.95);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      backdrop-filter: blur(12px);
-    }
-
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: var(--white) !important;
-      font-family: var(--font-title);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    .brand-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      background: var(--red);
-      color: white;
-      font-family: serif;
-      font-size: 1.45rem;
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(162, 15, 38, 0.25);
-    }
-
-    .navbar-nav {
-      align-items: center;
-      gap: 10px;
-    }
-
-    .navbar .nav-link {
-      color: #c8c0c0;
-      font-size: 0.76rem;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 10px 12px !important;
-      transition: color 0.3s ease;
-    }
-
-    .navbar .nav-link:hover,
-    .navbar .nav-link:focus {
-      color: var(--red-light);
-    }
-
-    .navbar-toggler {
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 8px 10px;
-    }
-
-    .navbar-toggler:focus {
-      box-shadow: 0 0 0 2px rgba(213, 29, 60, 0.25);
-    }
-
-    .navbar-toggler-icon {
-      filter: invert(1);
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 690px;
-      min-height: min(790px, 100svh);
-      display: flex;
-      align-items: center;
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: 130px 0 100px;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(5, 5, 5, 0.98) 0%,
-          rgba(5, 5, 5, 0.88) 42%,
-          rgba(5, 5, 5, 0.35) 100%
-        ),
-        linear-gradient(
-          0deg,
-          var(--bg) 0%,
-          transparent 30%,
-          rgba(0, 0, 0, 0.2) 100%
-        ),
-        url("https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=2000&q=85")
-        center 45% / cover no-repeat;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      right: 7%;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(
-        transparent,
-        rgba(213, 29, 60, 0.65),
-        transparent
-      );
-    }
-
-    .hero::after {
-      content: "朱";
-      position: absolute;
-      z-index: -1;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: serif;
-      font-size: clamp(10rem, 25vw, 24rem);
-      color: rgba(180, 15, 40, 0.12);
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .hero-content {
-      max-width: 750px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-kicker {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: #e6b5bd;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .hero-kicker::before {
-      content: "";
-      width: 42px;
-      height: 2px;
-      background: var(--red-light);
-    }
-
-    .hero h1 {
-      font-family: var(--font-title);
-      font-size: clamp(3rem, 8vw, 6.6rem);
-      line-height: 1.04;
-      font-weight: 600;
-      letter-spacing: -2px;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 span {
-      color: var(--red-light);
-      display: block;
-    }
-
-    .hero-description {
-      color: #c7bebe;
-      font-size: 1.02rem;
-      max-width: 530px;
-      margin-bottom: 35px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .hero-caption {
-      position: absolute;
-      bottom: 30px;
-      right: 5%;
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 0.65rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-    }
-
-    /* FAIXA DE DESTAQUES */
-
-    .feature-strip {
-      background: #100d0e;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 28px 0;
-    }
-
-    .feature-strip-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 13px;
-      padding: 8px 15px;
-      height: 100%;
-    }
-
-    .feature-icon {
-      color: var(--red-light);
-      font-size: 1.45rem;
-      line-height: 1;
-    }
-
-    .feature-strip-item strong {
-      display: block;
-      color: var(--white);
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .feature-strip-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.73rem;
-    }
-
-    /* SOBRE */
-
-    .about-section {
-      background:
-        radial-gradient(
-          ellipse at 0% 50%,
-          rgba(108, 10, 27, 0.12),
-          transparent 50%
-        ),
-        var(--bg);
-    }
-
-    .about-visual {
-      min-height: 460px;
-      height: 100%;
-      position: relative;
-      background:
-        linear-gradient(
-          0deg,
-          rgba(0, 0, 0, 0.65),
-          transparent 60%
-        ),
-        url("https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1100&q=85")
-        center / cover no-repeat;
-      border: 1px solid var(--border);
-    }
-
-    .about-visual::before {
-      content: "";
-      position: absolute;
-      inset: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      pointer-events: none;
-    }
-
-    .about-stamp {
-      position: absolute;
-      bottom: 30px;
-      left: 30px;
-      background: var(--red);
-      padding: 16px 20px;
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-    }
-
-    .about-content {
-      padding: 25px 0 25px 25px;
-    }
-
-    .about-content p {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .about-points {
-      list-style: none;
-      padding: 0;
-      margin: 28px 0;
-    }
-
-    .about-points li {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 15px;
-      color: #d8d0d0;
-      font-size: 0.9rem;
-    }
-
-    .about-points li span {
-      color: var(--red-light);
-      font-weight: 700;
-    }
-
-    /* ESTILOS */
-
-    .styles-section {
-      background: var(--bg-secondary);
-      position: relative;
-    }
-
-    .styles-section::before {
-      content: "和";
-      position: absolute;
-      left: -20px;
-      top: 40px;
-      color: rgba(255, 255, 255, 0.025);
-      font-family: serif;
-      font-size: 20rem;
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .style-card {
-      position: relative;
-      min-height: 310px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-      padding: 28px;
-      background:
-        linear-gradient(
-          0deg,
-          rgba(0, 0, 0, 0.97) 0%,
-          rgba(0, 0, 0, 0.65) 50%,
-          rgba(0, 0, 0, 0.12) 100%
-        ),
-        var(--card-image, linear-gradient(135deg, #251317, #090909));
-      background-position: center;
-      background-size: cover;
-      border: 1px solid var(--border);
-      transition: border-color 0.35s ease, transform 0.35s ease;
-      isolation: isolate;
-    }
-
-    .style-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(
-        135deg,
-        rgba(162, 15, 38, 0.15),
-        transparent 60%
-      );
-      transition: opacity 0.35s ease;
-    }
-
-    .style-card:hover {
-      border-color: var(--red-light);
-      transform: translateY(-6px);
-    }
-
-    .style-card:hover::before {
-      opacity: 0.2;
-    }
-
-    .style-number {
-      color: var(--red-light);
-      font-family: var(--font-title);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    .style-card h3 {
-      font-family: var(--font-title);
-      font-size: 1.45rem;
-      margin-bottom: 10px;
-    }
-
-    .style-card p {
-      color: #bdb3b3;
-      font-size: 0.84rem;
-      margin-bottom: 0;
-    }
-
-    .style-blackwork {
-      --card-image: linear-gradient(135deg, #252525, #080808);
-    }
-
-    .style-japanese {
-      --card-image:
-        linear-gradient(135deg, rgba(40, 7, 14, 0.4), #090909),
-        url("https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=800&q=80");
-    }
-
-    .style-fine {
-      --card-image: linear-gradient(135deg, #302326, #100d0e);
-    }
-
-    .style-realism {
-      --card-image:
-        linear-gradient(135deg, rgba(15, 15, 15, 0.2), #090909),
-        url("https://images.unsplash.com/photo-1590246814883-57c511b6f9a1?auto=format&fit=crop&w=800&q=80");
-    }
-
-    .style-card-link {
-      color: #f0b2bd;
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-top: 20px;
-    }
-
-    .style-card-link:hover {
-      color: white;
-    }
-
-    /* DIFERENCIAIS */
-
-    .values-section {
-      background: var(--bg);
-    }
-
-    .value-card {
-      padding: 35px 28px;
-      background: linear-gradient(145deg, #171313, #0d0c0c);
-      border: 1px solid var(--border);
-      height: 100%;
-      transition: 0.3s ease;
-    }
-
-    .value-card:hover {
-      border-color: rgba(213, 29, 60, 0.6);
-      background: #181113;
-    }
-
-    .value-symbol {
-      color: var(--red-light);
-      font-family: var(--font-title);
-      font-size: 2.1rem;
-      margin-bottom: 20px;
-    }
-
-    .value-card h3 {
-      font-family: var(--font-title);
-      font-size: 1.15rem;
-      margin-bottom: 13px;
-    }
-
-    .value-card p {
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin: 0;
-    }
-
-    /* COMO FUNCIONA */
-
-    .process-section {
-      background:
-        linear-gradient(rgba(10, 8, 9, 0.94), rgba(10, 8, 9, 0.97)),
-        url("https://images.unsplash.com/photo-1542728928-1413d1894ed1?auto=format&fit=crop&w=1800&q=80")
-        center / cover no-repeat;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .process-card {
-      position: relative;
-      padding: 30px 25px;
-      height: 100%;
-      background: rgba(20, 16, 17, 0.75);
-      border: 1px solid var(--border);
-    }
-
-    .process-number {
-      font-family: var(--font-title);
-      font-size: 2.7rem;
-      color: var(--red-light);
-      opacity: 0.9;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .process-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .process-card p {
-      color: var(--muted);
-      font-size: 0.86rem;
-      margin-bottom: 0;
-    }
-
-    /* CHAMADA FINAL */
-
-    .cta-section {
-      padding: 90px 0;
-      text-align: center;
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(162, 15, 38, 0.2),
-          transparent 65%
-        ),
-        #0d0a0b;
-    }
-
-    .cta-kanji {
-      color: var(--red-light);
-      font-family: serif;
-      font-size: 3.3rem;
-      margin-bottom: 20px;
-      line-height: 1;
-    }
-
-    .cta-section .section-title {
-      max-width: 750px;
-      margin: 0 auto 20px;
-    }
-
-    .cta-section p {
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto 30px;
-    }
-
-    /* RODAPÉ */
-
-    footer {
-      background: #070707;
-      border-top: 1px solid var(--border);
-      padding: 55px 0 20px;
-    }
-
-    .footer-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-    }
-
-    .footer-description {
-      color: var(--muted);
-      font-size: 0.86rem;
-      max-width: 330px;
-    }
-
-    .footer-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links li {
-      margin-bottom: 12px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      font-size: 0.85rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--red-light);
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 15px;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      color: #766e6e;
-      font-size: 0.75rem;
-    }
-
-    .footer-bottom a {
-      color: #b6a9a9;
-    }
-
-    /* ACESSIBILIDADE */
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--red-light);
-      outline-offset: 4px;
-    }
-
-    /* RESPONSIVIDADE */
-
-    @media (max-width: 991px) {
-      section {
-        padding: 75px 0;
-      }
-
-      .navbar-nav {
-        align-items: stretch;
-        padding-top: 15px;
-      }
-
-      .navbar .nav-link {
-        padding: 12px 0 !important;
-      }
-
-      .navbar .btn-akemi {
-        margin-top: 10px;
-        align-self: flex-start;
-      }
-
-      .hero {
-        min-height: 650px;
-        background-position: 60% center;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 9vw, 5rem);
-      }
-
-      .about-content {
-        padding: 35px 0 0;
-      }
-
-      .about-visual {
-        min-height: 400px;
-      }
-
-      .feature-strip-item {
-        justify-content: flex-start;
-      }
-    }
-
-    @media (max-width: 575px) {
-      section {
-        padding: 65px 0;
-      }
-
-      .navbar-brand {
-        font-size: 0.95rem;
-        letter-spacing: 1px;
-      }
-
-      .brand-symbol {
-        width: 34px;
-        height: 34px;
-        font-size: 1.25rem;
-      }
-
-      .hero {
-        min-height: 680px;
-        padding: 115px 0 90px;
-        background-position: 58% center;
-      }
-
-      .hero::after {
-        right: -5%;
-        font-size: 12rem;
-      }
-
-      .hero-kicker {
-        font-size: 0.65rem;
-        letter-spacing: 2px;
-      }
-
-      .hero h1 {
-        font-size: clamp(2.7rem, 13vw, 4.2rem);
-        letter-spacing: -1px;
-      }
-
-      .hero-description {
-        font-size: 0.92rem;
-      }
-
-      .hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .hero-actions a {
-        width: 100%;
-      }
-
-      .hero-caption {
-        display: none;
-      }
-
-      .about-visual {
-        min-height: 330px;
-      }
-
-      .about-stamp {
-        bottom: 25px;
-        left: 25px;
-        font-size: 0.9rem;
-      }
-
-      .style-card {
-        min-height: 270px;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1b1a18">
+
+    <title>Akemi Studio | Arte na Pele</title>
+
+    <meta name="description" content="Akemi Studio — arte, identidade e precisão. Conheça nossos estilos de tatuagem e descubra o próximo capítulo da sua história.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #1b1a18;
+            --panel: #242320;
+            --panel-hover: #302d28;
+            --text: #f1e9dc;
+            --muted: #c0b8ab;
+            --red: #98453f;
+            --red-light: #d08073;
+            --border: rgba(241, 233, 220, .15);
+            --soft: #302d28;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            background:
+                radial-gradient(
+                    ellipse at 85% 8%,
+                    rgba(152, 69, 63, .13),
+                    transparent 34rem
+                ),
+                var(--bg);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        ::selection {
+            color: white;
+            background: var(--red);
+        }
+
+        /* Navegação */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(27, 26, 24, .96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+        }
+
+        .navbar {
+            padding: 15px 0;
+        }
+
+        .navbar > .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            color: var(--text) !important;
+            font-size: .95rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            white-space: nowrap;
+        }
+
+        .brand-symbol {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            place-items: center;
+            color: var(--text);
+            background: var(--red);
+            border: 1px solid rgba(241, 233, 220, .25);
+            border-radius: 2px;
+            font-family: serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            transition: transform .3s, background .3s;
+        }
+
+        .navbar-brand:hover .brand-symbol {
+            transform: rotate(-5deg);
+            background: var(--red-light);
+        }
+
+        .brand-studio {
+            color: var(--red-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .nav-links a {
+            padding: 9px 11px;
+            color: var(--muted);
+            font-size: .79rem;
+            border-radius: 3px;
+            transition: color .2s, background .2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: rgba(208, 128, 115, .12);
+        }
+
+        .nav-links a.active {
+            box-shadow: inset 0 -2px var(--red-light);
+        }
+
+        .nav-links .nav-access {
+            margin-left: 5px;
+            padding: 9px 15px;
+            color: white;
+            background: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        .nav-links .nav-access:hover {
+            color: white;
+            background: var(--red-light);
+            border-color: var(--red-light);
+        }
+
+        /* Elementos gerais */
+
+        .container-site {
+            width: min(1100px, 100%);
+            margin: 0 auto;
+            padding-right: 22px;
+            padding-left: 22px;
+        }
+
+        .section {
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 17px;
+            color: var(--red-light);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 25px;
+            height: 1px;
+            background: var(--red-light);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+            letter-spacing: -.025em;
+        }
+
+        .section-description {
+            max-width: 650px;
+            margin-bottom: 35px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        .text-accent {
+            color: var(--red-light);
+        }
+
+        .btn-akemi {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 21px;
+            color: white;
+            background: var(--red);
+            border: 1px solid var(--red);
+            border-radius: 3px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .035em;
+            transition: all .25s;
+        }
+
+        .btn-akemi:hover {
+            color: white;
+            background: var(--red-light);
+            border-color: var(--red-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-akemi {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 21px;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-size: .8rem;
+            font-weight: 600;
+            transition: all .25s;
+        }
+
+        .btn-outline-akemi:hover {
+            color: var(--text);
+            background: var(--panel-hover);
+            border-color: var(--red-light);
+        }
+
+        /* Início */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 610px;
+            padding: 85px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero::after {
+            position: absolute;
+            top: 8%;
+            right: 5%;
+            z-index: 0;
+            content: "朱";
+            color: rgba(208, 128, 115, .065);
+            font-family: serif;
+            font-size: clamp(15rem, 30vw, 27rem);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 25px;
+            padding: 7px 12px;
+            color: var(--muted);
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-size: .75rem;
+        }
+
+        .hero-label span {
+            width: 7px;
+            height: 7px;
+            background: var(--red-light);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            max-width: 680px;
+            margin: 0 0 23px;
+            font-size: clamp(3rem, 7vw, 5.7rem);
+            line-height: 1.04;
+            letter-spacing: -.045em;
+        }
+
+        .hero h1 em {
+            color: var(--red-light);
+            font-weight: 500;
+        }
+
+        .hero-description {
+            max-width: 530px;
+            margin-bottom: 30px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 45px;
+            color: var(--muted);
+            font-size: .76rem;
+        }
+
+        .hero-note::before {
+            content: "";
+            width: 35px;
+            height: 1px;
+            background: var(--red-light);
+        }
+
+        /* Faixa informativa */
+
+        .info-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-item {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .info-item + .info-item {
+            border-left: 1px solid var(--border);
+        }
+
+        .info-item strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: .88rem;
+            font-weight: 600;
+        }
+
+        .info-item span {
+            color: var(--muted);
+            font-size: .76rem;
+        }
+
+        /* Sobre */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .about-art {
+            position: relative;
+            display: grid;
+            min-height: 360px;
+            place-items: center;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(208, 128, 115, .13),
+                    transparent 55%
+                ),
+                var(--panel);
+            border: 1px solid var(--border);
+        }
+
+        .about-art::before,
+        .about-art::after {
+            position: absolute;
+            content: "";
+            border: 1px solid rgba(208, 128, 115, .22);
+            border-radius: 50%;
+        }
+
+        .about-art::before {
+            width: 245px;
+            height: 245px;
+        }
+
+        .about-art::after {
+            width: 285px;
+            height: 285px;
+        }
+
+        .about-kanji {
+            position: relative;
+            z-index: 1;
+            color: var(--red-light);
+            font-family: serif;
+            font-size: 9rem;
+            line-height: 1;
+        }
+
+        .about-caption {
+            position: absolute;
+            right: 20px;
+            bottom: 18px;
+            left: 20px;
+            color: var(--muted);
+            font-size: .73rem;
+            letter-spacing: .09em;
+            text-align: center;
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .about-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            margin-top: 25px;
+        }
+
+        .detail-symbol {
+            display: grid;
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            place-items: center;
+            color: var(--red-light);
+            background: rgba(152, 69, 63, .16);
+            border: 1px solid rgba(208, 128, 115, .2);
+            border-radius: 3px;
+        }
+
+        .about-detail strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: .86rem;
+        }
+
+        .about-detail span {
+            color: var(--muted);
+            font-size: .8rem;
+        }
+
+        /* Estilos */
+
+        .styles-section {
+            background: rgba(255, 255, 255, .018);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .section-heading .section-description {
+            margin-bottom: 0;
+        }
+
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .style-card {
+            position: relative;
+            min-height: 220px;
+            overflow: hidden;
+            padding: 27px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            transition: transform .25s, border-color .25s, background .25s;
+        }
+
+        .style-card:hover {
+            transform: translateY(-4px);
+            background: var(--panel-hover);
+            border-color: rgba(208, 128, 115, .45);
+        }
+
+        .style-number {
+            display: block;
+            margin-bottom: 24px;
+            color: var(--red-light);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+
+        .style-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.35rem;
+        }
+
+        .style-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .style-arrow {
+            position: absolute;
+            right: 22px;
+            bottom: 17px;
+            color: var(--red-light);
+            font-size: 1.15rem;
+        }
+
+        .styles-footer {
+            margin-top: 28px;
+            color: var(--muted);
+            font-size: .8rem;
+        }
+
+        .styles-footer a {
+            color: var(--red-light);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Como funciona */
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            padding-top: 23px;
+            border-top: 1px solid var(--border);
+        }
+
+        .step-number {
+            display: block;
+            margin-bottom: 18px;
+            color: var(--red-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .step-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .step-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        /* Acesso ao sistema */
+
+        .access-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 50px;
+            background:
+                radial-gradient(
+                    ellipse at 100% 0%,
+                    rgba(152, 69, 63, .2),
+                    transparent 55%
+                ),
+                var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
+
+        .access-panel::after {
+            position: absolute;
+            top: 5px;
+            right: 30px;
+            content: "朱";
+            color: rgba(208, 128, 115, .08);
+            font-family: serif;
+            font-size: 11rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .access-content {
+            position: relative;
+            z-index: 1;
+            max-width: 660px;
+        }
+
+        .access-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        .access-content p {
+            max-width: 560px;
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        /* Rodapé */
+
+        .site-footer {
+            margin-top: 20px;
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            color: var(--text);
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .09em;
+        }
+
+        .footer-brand span {
+            color: var(--red-light);
+        }
+
+        .footer-copy {
+            color: var(--muted);
+            font-size: .73rem;
+        }
+
+        .footer-top {
+            color: var(--muted);
+            font-size: .76rem;
+            transition: color .2s;
+        }
+
+        .footer-top:hover {
+            color: var(--red-light);
+        }
+
+        /* Acessibilidade e responsividade */
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--red-light);
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .navbar > .container {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .about-grid {
+                gap: 35px;
+            }
+
+            .styles-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 13px 0;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+                font-size: .75rem;
+            }
+
+            .nav-links .nav-access {
+                margin-left: 0;
+            }
+
+            .container-site {
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 75px 0 65px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.8rem, 12vw, 4.2rem);
+            }
+
+            .hero-description {
+                font-size: .92rem;
+            }
+
+            .hero::after {
+                top: 20%;
+                right: -20%;
+                font-size: 15rem;
+            }
+
+            .hero-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .hero-actions a {
+                width: 100%;
+            }
+
+            .info-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item {
+                padding: 18px;
+            }
+
+            .info-item + .info-item {
+                border-top: 1px solid var(--border);
+                border-left: 0;
+            }
+
+            .section {
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .about-art {
+                min-height: 290px;
+            }
+
+            .about-kanji {
+                font-size: 7rem;
+            }
+
+            .about-art::before {
+                width: 205px;
+                height: 205px;
+            }
+
+            .about-art::after {
+                width: 240px;
+                height: 240px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .styles-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .style-card {
+                min-height: 185px;
+            }
+
+            .steps-grid {
+                gap: 30px;
+            }
+
+            .access-panel {
+                padding: 30px 22px;
+            }
+
+            .access-panel::after {
+                right: 5px;
+                font-size: 8rem;
+            }
+
+            .footer-content {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 9px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body id="topo">
 
-  <!-- =====================================
-       MENU PRINCIPAL
-  ====================================== -->
+    <!-- Navegação principal -->
+    <header class="topbar">
+        <nav class="navbar" aria-label="Navegação principal">
+            <div class="container">
 
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
+                <a class="navbar-brand" href="#inicio" aria-label="Akemi Studio - Início">
+                    <span class="brand-symbol">朱</span>
+                    <span>AKEMI <span class="brand-studio">STUDIO.</span></span>
+                </a>
 
-      <a class="navbar-brand" href="#inicio" aria-label="AKEMI STUDIO - Início">
-        <span class="brand-symbol">朱</span>
-        <span>AKEMI STUDIO</span>
-      </a>
+                <div class="nav-links">
+                    <a href="#inicio" class="active" aria-current="page">Início</a>
+                    <a href="#sobre">O estúdio</a>
+                    <a href="#estilos">Estilos</a>
+                    <a href="#atendimento">Atendimento</a>
+                    <a href="login.html" class="nav-access">Acessar sistema ↗</a>
+                </div>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#menuAkemi"
-        aria-controls="menuAkemi"
-        aria-expanded="false"
-        aria-label="Abrir menu de navegação"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="menuAkemi">
-        <ul class="navbar-nav ms-auto">
-
-          <li class="nav-item">
-            <a class="nav-link" href="#inicio">Início</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#sobre">O estúdio</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#estilos">Estilos</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#diferenciais">Diferenciais</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#processo">Como funciona</a>
-          </li>
-
-          <li class="nav-item ms-lg-2">
-            <a class="btn-akemi" href="login.html">
-              Acessar sistema
-            </a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-  <!-- =====================================
-       INÍCIO / HERO
-  ====================================== -->
-
-  <header class="hero" id="inicio">
-    <div class="container">
-      <div class="hero-content">
-
-        <div class="hero-kicker">
-          Arte • Identidade • Expressão
-        </div>
-
-        <h1>
-          Sua história.
-          <span>Na própria pele.</span>
-        </h1>
-
-        <p class="hero-description">
-          Mais do que tinta, uma forma de expressão. No AKEMI STUDIO,
-          cada traço carrega significado, personalidade e uma história
-          que merece ser contada.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#estilos" class="btn-akemi">
-            Explorar estilos <span aria-hidden="true">↗</span>
-          </a>
-
-          <a href="#sobre" class="btn-outline-akemi">
-            Conheça o estúdio
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="hero-caption">
-      Arte que permanece
-    </div>
-  </header>
-
-
-  <!-- =====================================
-       FAIXA DE DESTAQUES
-  ====================================== -->
-
-  <div class="feature-strip">
-    <div class="container">
-      <div class="row g-3">
-
-        <div class="col-12 col-md-4">
-          <div class="feature-strip-item">
-            <div class="feature-icon" aria-hidden="true">✦</div>
-            <div>
-              <strong>Arte autoral</strong>
-              <span>Ideias que ganham forma</span>
             </div>
-          </div>
-        </div>
+        </nav>
+    </header>
 
-        <div class="col-12 col-md-4">
-          <div class="feature-strip-item">
-            <div class="feature-icon" aria-hidden="true">◈</div>
-            <div>
-              <strong>Identidade única</strong>
-              <span>Seu estilo, sua história</span>
+    <main>
+
+        <!-- Apresentação -->
+        <section class="hero" id="inicio">
+            <div class="container-site">
+                <div class="hero-content">
+
+                    <div class="hero-label">
+                        <span></span>
+                        AKEMI STUDIO · ARTE NA PELE
+                    </div>
+
+                    <div class="eyebrow">Sua história, sua identidade</div>
+
+                    <h1>
+                        Mais que tinta.
+                        <em>Uma expressão de quem você é.</em>
+                    </h1>
+
+                    <p class="hero-description">
+                        Cada traço carrega um significado. No Akemi Studio,
+                        transformamos ideias, memórias e referências em arte
+                        feita para acompanhar você.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#estilos" class="btn-akemi">
+                            Conheça nossos estilos <span>↗</span>
+                        </a>
+
+                        <a href="#sobre" class="btn-outline-akemi">
+                            Descubra o estúdio
+                        </a>
+                    </div>
+
+                    <div class="hero-note">
+                        Arte, identidade e precisão.
+                    </div>
+
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
 
-        <div class="col-12 col-md-4">
-          <div class="feature-strip-item">
-            <div class="feature-icon" aria-hidden="true">✧</div>
-            <div>
-              <strong>Cuidado em cada traço</strong>
-              <span>Da ideia ao resultado</span>
+        <!-- Características -->
+        <section class="info-strip" aria-label="Características do estúdio">
+            <div class="info-item">
+                <strong>Arte com significado</strong>
+                <span>Ideias transformadas em desenhos</span>
             </div>
-          </div>
-        </div>
 
-      </div>
-    </div>
-  </div>
-
-
-  <!-- =====================================
-       SOBRE O ESTÚDIO
-  ====================================== -->
-
-  <section class="about-section" id="sobre">
-    <div class="container">
-      <div class="row align-items-center g-5">
-
-        <div class="col-12 col-lg-6">
-          <div
-            class="about-visual"
-            role="img"
-            aria-label="Ambiente artístico de um estúdio de tatuagem"
-          >
-            <div class="about-stamp">
-              AKEMI — 朱
+            <div class="info-item">
+                <strong>Identidade própria</strong>
+                <span>Seu estilo, sua história</span>
             </div>
-          </div>
+
+            <div class="info-item">
+                <strong>Atendimento organizado</strong>
+                <span>Mais clareza em cada etapa</span>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section class="section" id="sobre">
+            <div class="container-site">
+                <div class="about-grid">
+
+                    <div class="about-art" aria-label="Símbolo visual do Akemi Studio">
+                        <span class="about-kanji" aria-hidden="true">朱</span>
+                        <span class="about-caption">
+                            AKEMI STUDIO · ARTE E EXPRESSÃO
+                        </span>
+                    </div>
+
+                    <div class="about-copy">
+                        <div class="eyebrow">Conheça o Akemi</div>
+
+                        <h2>
+                            A arte que começa
+                            <span class="text-accent">com uma ideia.</span>
+                        </h2>
+
+                        <p>
+                            Uma tatuagem pode representar uma fase, uma lembrança,
+                            uma paixão ou simplesmente algo que combina com você.
+                            Cada projeto começa com uma ideia e ganha forma por
+                            meio da escolha do estilo e dos detalhes.
+                        </p>
+
+                        <p>
+                            O Akemi Studio reúne a identidade visual da cultura
+                            japonesa com uma estética contemporânea, criando um
+                            espaço pensado para valorizar a arte na pele.
+                        </p>
+
+                        <div class="about-detail">
+                            <div class="detail-symbol" aria-hidden="true">✳</div>
+                            <div>
+                                <strong>Personalidade em cada traço</strong>
+                                <span>Referências, conceitos e desenhos com identidade.</span>
+                            </div>
+                        </div>
+
+                        <div class="about-detail">
+                            <div class="detail-symbol" aria-hidden="true">⌁</div>
+                            <div>
+                                <strong>Organização do início ao fim</strong>
+                                <span>Informações e etapas de atendimento reunidas em um só lugar.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Estilos de tatuagem -->
+        <section class="section styles-section" id="estilos">
+            <div class="container-site">
+
+                <div class="section-heading">
+                    <div>
+                        <div class="eyebrow">Encontre sua linguagem</div>
+                        <h2>Estilos de tatuagem</h2>
+                        <p class="section-description">
+                            Do traço delicado às composições marcantes, cada
+                            estilo possui características próprias. Explore
+                            algumas possibilidades para sua próxima tatuagem.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="styles-grid">
+
+                    <article class="style-card">
+                        <span class="style-number">01 / BLACKWORK</span>
+                        <h3>Blackwork</h3>
+                        <p>
+                            Contrastes intensos, áreas sólidas de preto
+                            e composições gráficas expressivas.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="style-card">
+                        <span class="style-number">02 / AQUARELA</span>
+                        <h3>Aquarela</h3>
+                        <p>
+                            Cores, manchas e transições que lembram
+                            a fluidez da pintura em papel.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="style-card">
+                        <span class="style-number">03 / REALISMO</span>
+                        <h3>Realismo</h3>
+                        <p>
+                            Sombras, texturas e detalhes que buscam
+                            reproduzir imagens com profundidade.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="style-card">
+                        <span class="style-number">04 / OLD SCHOOL</span>
+                        <h3>Old School</h3>
+                        <p>
+                            Contornos marcados, cores tradicionais
+                            e referências clássicas da tatuagem.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="style-card">
+                        <span class="style-number">05 / FINE LINE</span>
+                        <h3>Fine Line</h3>
+                        <p>
+                            Linhas finas e composições delicadas,
+                            com atenção especial aos pequenos detalhes.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="style-card">
+                        <span class="style-number">06 / ORIENTAL</span>
+                        <h3>Oriental</h3>
+                        <p>
+                            Referências tradicionais japonesas,
+                            figuras simbólicas e composições marcantes.
+                        </p>
+                        <span class="style-arrow" aria-hidden="true">↗</span>
+                    </article>
+
+                </div>
+
+                <p class="styles-footer">
+                    Os estilos apresentados são referências.
+                    <a href="login.html">Acesse o sistema</a>
+                    para conhecer as funcionalidades disponíveis.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Atendimento -->
+        <section class="section" id="atendimento">
+            <div class="container-site">
+
+                <div class="eyebrow">Do conceito à pele</div>
+
+                <h2>
+                    Como funciona o
+                    <span class="text-accent">atendimento?</span>
+                </h2>
+
+                <p class="section-description">
+                    Um bom projeto começa com comunicação clara e planejamento.
+                    Conheça as etapas que ajudam a organizar uma sessão.
+                </p>
+
+                <div class="steps-grid">
+
+                    <article class="step-card">
+                        <span class="step-number">01</span>
+                        <h3>Compartilhe sua ideia</h3>
+                        <p>
+                            Defina o conceito, reúna referências e pense no
+                            tamanho, na região do corpo e no estilo desejado.
+                        </p>
+                    </article>
+
+                    <article class="step-card">
+                        <span class="step-number">02</span>
+                        <h3>Planeje os detalhes</h3>
+                        <p>
+                            Organize as informações do projeto e alinhe
+                            os detalhes necessários antes da sessão.
+                        </p>
+                    </article>
+
+                    <article class="step-card">
+                        <span class="step-number">03</span>
+                        <h3>Organize sua sessão</h3>
+                        <p>
+                            Consulte as informações do agendamento e acompanhe
+                            os detalhes registrados no sistema.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Acesso administrativo -->
+        <section class="section" id="sistema">
+            <div class="container-site">
+                <div class="access-panel">
+                    <div class="access-content">
+
+                        <div class="eyebrow">Área administrativa</div>
+
+                        <h2>
+                            Organização também faz parte da
+                            <span class="text-accent">arte.</span>
+                        </h2>
+
+                        <p>
+                            Acesse o sistema do Akemi Studio para gerenciar
+                            clientes, tatuadores, estilos e agendamentos em
+                            um ambiente centralizado.
+                        </p>
+
+                        <a href="login.html" class="btn-akemi">
+                            Entrar no sistema <span>↗</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="site-footer">
+        <div class="container-site">
+            <div class="footer-content">
+
+                <a href="#inicio" class="footer-brand">
+                    AKEMI <span>STUDIO.</span>
+                </a>
+
+                <span class="footer-copy">
+                    © <span id="anoAtual"></span> Akemi Studio.
+                    Arte, identidade e precisão.
+                </span>
+
+                <a href="#topo" class="footer-top">
+                    Voltar ao topo ↑
+                </a>
+
+            </div>
         </div>
-
-        <div class="col-12 col-lg-6">
-          <div class="about-content">
-
-            <span class="section-label">A essência do estúdio</span>
-
-            <h2 class="section-title">
-              A arte encontra
-              <span class="text-red">a sua identidade.</span>
-            </h2>
-
-            <p>
-              O AKEMI STUDIO nasceu da ideia de que uma tatuagem pode
-              representar muito mais do que uma imagem. Ela pode marcar
-              uma fase, preservar uma lembrança ou revelar algo que
-              palavras não conseguem expressar.
-            </p>
-
-            <p>
-              Inspirado pela estética japonesa, pela força do preto e
-              pela intensidade do vermelho, o estúdio une personalidade,
-              criatividade e atenção aos detalhes.
-            </p>
-
-            <ul class="about-points">
-              <li>
-                <span>✦</span>
-                <span>Projetos pensados para expressar individualidade.</span>
-              </li>
-
-              <li>
-                <span>✦</span>
-                <span>Respeito às referências e às ideias de cada cliente.</span>
-              </li>
-
-              <li>
-                <span>✦</span>
-                <span>Organização e atenção em todas as etapas do atendimento.</span>
-              </li>
-            </ul>
-
-            <a href="#processo" class="btn-outline-akemi">
-              Conheça nosso processo
-            </a>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =====================================
-       ESTILOS DE TATUAGEM
-  ====================================== -->
-
-  <section class="styles-section" id="estilos">
-    <div class="container">
-
-      <div class="section-heading">
-        <span class="section-label">Encontre sua expressão</span>
-
-        <h2 class="section-title">
-          Estilos que contam <span class="text-red">histórias.</span>
-        </h2>
-
-        <p class="section-description">
-          Cada técnica tem sua linguagem, sua estética e sua maneira
-          de transformar ideias em arte. Explore algumas possibilidades.
-        </p>
-      </div>
-
-      <div class="row g-4">
-
-        <div class="col-12 col-sm-6 col-lg-3">
-          <article class="style-card style-blackwork">
-            <div class="style-number">01 / PRETO</div>
-
-            <h3>Blackwork</h3>
-
-            <p>
-              Contrastes intensos, áreas negras e composições marcantes.
-            </p>
-
-            <a href="login.html" class="style-card-link">
-              Saiba mais ↗
-            </a>
-          </article>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-          <article class="style-card style-japanese">
-            <div class="style-number">02 / TRADIÇÃO</div>
-
-            <h3>Oriental</h3>
-
-            <p>
-              Referências japonesas, simbolismo e composições expressivas.
-            </p>
-
-            <a href="login.html" class="style-card-link">
-              Saiba mais ↗
-            </a>
-          </article>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-          <article class="style-card style-fine">
-            <div class="style-number">03 / DELICADEZA</div>
-
-            <h3>Fine Line</h3>
-
-            <p>
-              Linhas finas, detalhes delicados e desenhos minimalistas.
-            </p>
-
-            <a href="login.html" class="style-card-link">
-              Saiba mais ↗
-            </a>
-          </article>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-          <article class="style-card style-realism">
-            <div class="style-number">04 / DETALHES</div>
-
-            <h3>Realismo</h3>
-
-            <p>
-              Sombras, texturas e composições que exploram profundidade.
-            </p>
-
-            <a href="login.html" class="style-card-link">
-              Saiba mais ↗
-            </a>
-          </article>
-        </div>
-
-      </div>
-
-      <div class="text-center mt-5">
-        <p class="section-description mb-4">
-          Quer conhecer os estilos disponíveis e organizar seu atendimento?
-        </p>
-
-        <a href="login.html" class="btn-akemi">
-          Acessar o sistema <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- =====================================
-       DIFERENCIAIS
-  ====================================== -->
-
-  <section class="values-section" id="diferenciais">
-    <div class="container">
-
-      <div class="section-heading">
-        <span class="section-label">O que nos inspira</span>
-
-        <h2 class="section-title">
-          Mais que uma tatuagem.
-          <span class="text-red">Uma experiência.</span>
-        </h2>
-
-        <p class="section-description">
-          A identidade do AKEMI STUDIO está nos detalhes: da primeira
-          conversa ao cuidado com cada etapa do trabalho.
-        </p>
-      </div>
-
-      <div class="row g-4">
-
-        <div class="col-12 col-md-4">
-          <article class="value-card">
-            <div class="value-symbol" aria-hidden="true">影</div>
-
-            <h3>Identidade</h3>
-
-            <p>
-              Cada pessoa tem uma história. As referências e ideias
-              individuais são o ponto de partida para uma arte com significado.
-            </p>
-          </article>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <article class="value-card">
-            <div class="value-symbol" aria-hidden="true">美</div>
-
-            <h3>Precisão</h3>
-
-            <p>
-              Atenção à composição, aos detalhes e à escolha de um estilo
-              que faça sentido para cada projeto.
-            </p>
-          </article>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <article class="value-card">
-            <div class="value-symbol" aria-hidden="true">心</div>
-
-            <h3>Cuidado</h3>
-
-            <p>
-              Um atendimento organizado, com comunicação clara e atenção
-              às necessidades de cada cliente.
-            </p>
-          </article>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =====================================
-       COMO FUNCIONA
-  ====================================== -->
-
-  <section class="process-section" id="processo">
-    <div class="container">
-
-      <div class="section-heading">
-        <span class="section-label">Do conceito à pele</span>
-
-        <h2 class="section-title">
-          Cada traço começa <span class="text-red">com uma ideia.</span>
-        </h2>
-
-        <p class="section-description">
-          Um processo organizado ajuda a transformar uma referência
-          em um projeto de tatuagem.
-        </p>
-      </div>
-
-      <div class="row g-4">
-
-        <div class="col-12 col-md-4">
-          <article class="process-card">
-            <div class="process-number">01</div>
-
-            <h3>Compartilhe sua ideia</h3>
-
-            <p>
-              Reúna referências, pense no significado do desenho e
-              identifique o estilo que mais combina com você.
-            </p>
-          </article>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <article class="process-card">
-            <div class="process-number">02</div>
-
-            <h3>Planeje o projeto</h3>
-
-            <p>
-              Defina os detalhes do desenho, a região do corpo e os
-              pontos que precisam ser discutidos antes da sessão.
-            </p>
-          </article>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <article class="process-card">
-            <div class="process-number">03</div>
-
-            <h3>Prepare-se para a sessão</h3>
-
-            <p>
-              Com o projeto alinhado, confirme os detalhes do atendimento
-              e siga as orientações profissionais recebidas.
-            </p>
-          </article>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- =====================================
-       CHAMADA FINAL
-  ====================================== -->
-
-  <section class="cta-section">
-    <div class="container">
-
-      <div class="cta-kanji" aria-hidden="true">朱</div>
-
-      <span class="section-label">AKEMI STUDIO</span>
-
-      <h2 class="section-title">
-        Sua pele. Sua arte.
-        <span class="text-red">Sua história.</span>
-      </h2>
-
-      <p>
-        Explore possibilidades, conheça os estilos e acesse o sistema
-        do estúdio para continuar.
-      </p>
-
-      <a href="login.html" class="btn-akemi">
-        Entrar no sistema <span aria-hidden="true">↗</span>
-      </a>
-
-    </div>
-  </section>
-
-
-  <!-- =====================================
-       RODAPÉ
-  ====================================== -->
-
-  <footer>
-    <div class="container">
-
-      <div class="row g-5">
-
-        <div class="col-12 col-md-6 col-lg-5">
-          <a class="footer-brand" href="#inicio">
-            <span class="brand-symbol">朱</span>
-            <span>AKEMI STUDIO</span>
-          </a>
-
-          <p class="footer-description">
-            Um espaço onde arte, identidade e expressão se encontram.
-            Cada traço tem uma intenção. Cada tatuagem conta uma história.
-          </p>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-3">
-          <h3 class="footer-title">Navegação</h3>
-
-          <ul class="footer-links">
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#sobre">O estúdio</a></li>
-            <li><a href="#estilos">Estilos</a></li>
-            <li><a href="#diferenciais">Diferenciais</a></li>
-            <li><a href="#processo">Como funciona</a></li>
-          </ul>
-        </div>
-
-        <div class="col-6 col-md-3 col-lg-4">
-          <h3 class="footer-title">Área do sistema</h3>
-
-          <ul class="footer-links">
-            <li><a href="login.html">Entrar</a></li>
-            <li><a href="cadastro.html">Criar cadastro</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        <span>
-          © <span id="anoAtual">2026</span> AKEMI STUDIO. Todos os direitos reservados.
-        </span>
-
-        <a href="#inicio">Voltar ao topo ↑</a>
-      </div>
-
-    </div>
-  </footer>
-
-
-  <!-- Bootstrap: menu responsivo -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Atualiza automaticamente o ano do rodapé.
-    document.getElementById("anoAtual").textContent =
-      new Date().getFullYear();
-  </script>
+    </footer>
+
+    <script>
+        document.getElementById("anoAtual").textContent =
+            new Date().getFullYear();
+
+        // Atualiza o destaque da navegação conforme a seção visível.
+        const secoes = document.querySelectorAll(
+            "#inicio, #sobre, #estilos, #atendimento"
+        );
+
+        const linksNavegacao = document.querySelectorAll(
+            '.nav-links a[href^="#"]'
+        );
+
+        if ("IntersectionObserver" in window) {
+            const observador = new IntersectionObserver((entradas) => {
+                entradas.forEach((entrada) => {
+                    if (!entrada.isIntersecting) return;
+
+                    linksNavegacao.forEach((link) => {
+                        const ativo =
+                            link.getAttribute("href") ===
+                            "#" + entrada.target.id;
+
+                        link.classList.toggle("active", ativo);
+
+                        if (ativo) {
+                            link.setAttribute("aria-current", "page");
+                        } else {
+                            link.removeAttribute("aria-current");
+                        }
+                    });
+                });
+            }, {
+                rootMargin: "-25% 0px -60% 0px"
+            });
+
+            secoes.forEach((secao) => observador.observe(secao));
+        }
+    </script>
 
 </body>
 </html>
-```

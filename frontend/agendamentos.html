@@ -1,607 +1,805 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendamentos — AKEMI STUDIO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111110">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Agendamentos | Akemi Studio</title>
 
-  <style>
-    :root {
-      --bg: #111110;
-      --panel: #191917;
-      --panel-hover: #22221f;
-      --border: #34332e;
-      --text: #eee9df;
-      --muted: #aaa49a;
-      --accent: #8f3935;
-      --accent-light: #bc6258;
-    }
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-    }
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
-    body {
-      min-height: 100vh;
-      margin: 0;
-      background:
-        radial-gradient(ellipse at 85% 0%, rgba(143, 57, 53, 0.09), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-    }
+    <style>
+        :root {
+            --bg: #111110;
+            --panel: #191917;
+            --panel-hover: #211f1b;
+            --text: #eee9df;
+            --muted: #aaa49a;
+            --red: #8f3935;
+            --red-light: #bc6258;
+            --border: rgba(238, 233, 223, .13);
+        }
 
-    .navbar {
-      background: rgba(17, 17, 16, 0.96) !important;
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      margin-bottom: 48px;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .navbar .container {
-      max-width: 1250px;
-    }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            background:
+                radial-gradient(
+                    ellipse at 90% 5%,
+                    rgba(143, 57, 53, .09),
+                    transparent 30rem
+                ),
+                var(--bg);
+        }
 
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      color: var(--text) !important;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      white-space: nowrap;
-    }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    .brand-symbol {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      margin-right: 9px;
-      background: var(--accent);
-      color: white;
-      font-family: serif;
-      font-size: 19px;
-      letter-spacing: 0;
-    }
+        /* Navegação */
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(17, 17, 16, .94);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+        }
 
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.84rem;
-      transition: color 0.2s ease;
-    }
+        .navbar {
+            padding: 16px 0;
+        }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-    }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text) !important;
+            font-size: .95rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+        }
 
-    .btn-exit {
-      padding: 6px 13px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
+        .brand-symbol {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            color: var(--text);
+            background: var(--red);
+            border: 1px solid rgba(238, 233, 223, .2);
+            border-radius: 2px;
+            font-family: serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            transition: transform .3s, background .3s;
+        }
 
-    .btn-exit:hover {
-      border-color: var(--accent-light);
-      background: rgba(143, 57, 53, 0.12);
-      color: var(--text);
-    }
+        .navbar-brand:hover .brand-symbol {
+            transform: rotate(-5deg);
+            background: var(--red-light);
+        }
 
-    main.container {
-      max-width: 1250px;
-      padding-bottom: 55px;
-    }
+        .brand-studio {
+            color: var(--red-light);
+            font-weight: 400;
+        }
 
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      color: var(--accent-light);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
 
-    .eyebrow::before {
-      width: 25px;
-      height: 1px;
-      background: var(--accent-light);
-      content: '';
-    }
+        .nav-links a {
+            padding: 9px 12px;
+            color: var(--muted);
+            font-size: .79rem;
+            border-radius: 3px;
+            transition: color .2s, background .2s;
+        }
 
-    h1,
-    .section-heading {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-    }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: rgba(188, 98, 88, .10);
+        }
 
-    h1 {
-      margin-bottom: 12px;
-      font-size: clamp(2.4rem, 5vw, 3.5rem);
-      letter-spacing: -1px;
-    }
+        .nav-links a.active {
+            box-shadow: inset 0 -2px var(--red-light);
+        }
 
-    .page-description {
-      margin-bottom: 38px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
+        .btn-logout {
+            padding: 8px 13px;
+            color: var(--muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-size: .78rem;
+            transition: all .2s;
+        }
 
-    .content-panel {
-      padding: 28px;
-      margin-bottom: 26px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      transition: border-color 0.25s ease;
-    }
+        .btn-logout:hover {
+            color: var(--text);
+            border-color: var(--red-light);
+        }
 
-    .content-panel:hover {
-      border-color: #4a3935;
-    }
+        /* Conteúdo */
 
-    .section-heading {
-      margin-bottom: 7px;
-      font-size: 1.35rem;
-    }
+        .page-content {
+            width: min(1100px, 100%);
+            margin: 0 auto;
+            padding: 48px 22px 70px;
+        }
 
-    .section-description {
-      margin-bottom: 24px;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+        .breadcrumb-text {
+            margin-bottom: 12px;
+            color: var(--muted);
+            font-size: .78rem;
+        }
 
-    .form-label {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
+        .breadcrumb-text span {
+            color: var(--red-light);
+        }
 
-    .form-control,
-    .form-select {
-      min-height: 46px;
-      padding: 12px 14px;
-      background-color: #121211;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text);
-      font-size: 0.88rem;
-    }
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 34px;
+        }
 
-    .form-control::placeholder {
-      color: #77736b;
-    }
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--red-light);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+        }
 
-    .form-control:focus,
-    .form-select:focus {
-      background-color: #121211;
-      border-color: var(--accent-light);
-      color: var(--text);
-      box-shadow: 0 0 0 3px rgba(143, 57, 53, 0.15);
-    }
+        .eyebrow::before {
+            content: "";
+            width: 25px;
+            height: 1px;
+            background: var(--red-light);
+        }
 
-    .form-select option {
-      background: var(--panel);
-      color: var(--text);
-    }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
 
-    input[type="date"],
-    input[type="time"],
-    input[type="file"] {
-      color-scheme: dark;
-    }
+        h1 {
+            margin: 0;
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
+            letter-spacing: -.04em;
+        }
 
-    textarea.form-control {
-      min-height: 100px;
-      resize: vertical;
-    }
+        .heading-description {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: .91rem;
+        }
 
-    input[type="file"]::file-selector-button {
-      margin: -5px 12px -5px -5px;
-      padding: 7px 10px;
-      background: #292824;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--text);
-    }
+        .section-index {
+            color: rgba(238, 233, 223, .16);
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1;
+        }
 
-    .btn-akemi {
-      min-height: 46px;
-      padding: 11px 22px;
-      background: var(--accent);
-      border: 1px solid var(--accent);
-      border-radius: 3px;
-      color: white;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
+        /* Painéis */
 
-    .btn-akemi:hover {
-      transform: translateY(-1px);
-      background: var(--accent-light);
-      border-color: var(--accent-light);
-      color: white;
-    }
+        .content-panel {
+            margin-bottom: 24px;
+            padding: 28px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            animation: rise .5s ease both;
+        }
 
-    .btn-save-edit {
-      background: #326b50;
-      border-color: #326b50;
-    }
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 24px;
+        }
 
-    .btn-save-edit:hover {
-      background: #3e8261;
-      border-color: #3e8261;
-    }
+        .panel-icon {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            place-items: center;
+            color: var(--red-light);
+            background: rgba(143, 57, 53, .13);
+            border: 1px solid rgba(188, 98, 88, .18);
+            border-radius: 3px;
+            font-size: 1.1rem;
+        }
 
-    .search-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 330px;
-    }
+        .panel-heading h2 {
+            margin: 0 0 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+        }
 
-    .search-wrapper .form-control {
-      min-height: 42px;
-      padding-left: 38px;
-    }
+        .panel-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .8rem;
+        }
 
-    .search-icon {
-      position: absolute;
-      top: 50%;
-      left: 13px;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
-    }
+        /* Formulário */
 
-    .table-responsive {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
+        .form-label {
+            margin-bottom: 9px;
+            color: #d9d2c7;
+            font-size: .82rem;
+        }
 
-    .table {
-      margin-bottom: 0;
-      vertical-align: middle;
-      --bs-table-bg: transparent;
-      --bs-table-color: var(--text);
-      --bs-table-border-color: var(--border);
-      --bs-table-hover-bg: var(--panel-hover);
-      --bs-table-hover-color: var(--text);
-    }
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            color: var(--text);
+            background-color: #111110;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-size: .88rem;
+            transition: border-color .2s, box-shadow .2s;
+        }
 
-    .table thead th {
-      padding: 16px;
-      background: #20201d;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
+        .form-control::placeholder {
+            color: #77736b;
+        }
 
-    .table tbody td {
-      padding: 15px 16px;
-      border-color: var(--border);
-      font-size: 0.84rem;
-    }
+        .form-control:focus,
+        .form-select:focus {
+            color: var(--text);
+            background-color: #141412;
+            border-color: var(--red-light);
+            box-shadow: 0 0 0 3px rgba(188, 98, 88, .10);
+        }
 
-    .table tbody tr:last-child td {
-      border-bottom: none;
-    }
+        .form-select option {
+            background: var(--panel);
+            color: var(--text);
+        }
 
-    #corpo-tabela td:first-child {
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
+        input[type="date"],
+        input[type="time"],
+        input[type="file"],
+        .form-select {
+            color-scheme: dark;
+        }
 
-    .table .btn {
-      margin: 2px;
-      border-radius: 3px;
-      font-size: 0.77rem;
-      white-space: nowrap;
-    }
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
 
-    .table .btn-warning {
-      background: #b58b42;
-      border-color: #b58b42;
-      color: #17140e;
-    }
+        input[type="file"]::file-selector-button {
+            margin: -5px 12px -5px -5px;
+            padding: 7px 10px;
+            color: var(--text);
+            background: #292824;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+        }
 
-    .table .btn-danger {
-      background: #8f3935;
-      border-color: #8f3935;
-    }
+        .form-hint {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: .76rem;
+        }
 
-    .table .btn-danger:hover {
-      background: #bc6258;
-      border-color: #bc6258;
-    }
+        .btn-primary-custom {
+            min-height: 48px;
+            padding: 11px 20px;
+            color: white;
+            background: var(--red);
+            border: 1px solid var(--red);
+            border-radius: 3px;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            transition: all .25s;
+        }
 
-    .status-badge {
-      display: inline-block;
-      padding: 5px 9px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      font-size: 0.72rem;
-      white-space: nowrap;
-    }
+        .btn-primary-custom:hover {
+            color: white;
+            background: var(--red-light);
+            border-color: var(--red-light);
+            transform: translateY(-2px);
+        }
 
-    .status-pendente {
-      background: rgba(181, 139, 66, 0.12);
-      border-color: rgba(181, 139, 66, 0.4);
-      color: #dfbb77;
-    }
+        /* Estado "salvar edição" / "salvo" (usado pelo js/agendamentos.js) */
 
-    .status-confirmado {
-      background: rgba(62, 130, 97, 0.12);
-      border-color: rgba(62, 130, 97, 0.4);
-      color: #8dc6a5;
-    }
+        .btn-primary-custom.btn-save-edit,
+        .btn-primary-custom.btn-success {
+            color: white;
+            background: #356b50;
+            border-color: #356b50;
+        }
 
-    .status-concluido {
-      background: rgba(120, 120, 120, 0.12);
-      border-color: #50504a;
-      color: #d0cbc1;
-    }
+        .btn-primary-custom.btn-save-edit:hover,
+        .btn-primary-custom.btn-success:hover {
+            color: white;
+            background: #3e8261;
+            border-color: #3e8261;
+        }
 
-    .status-cancelado {
-      background: rgba(143, 57, 53, 0.15);
-      border-color: rgba(143, 57, 53, 0.5);
-      color: #e28a81;
-    }
+        /* Tabela */
 
-    footer {
-      padding: 20px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
 
-    @media (max-width: 768px) {
-      .navbar {
-        margin-bottom: 30px;
-      }
+        .table-toolbar h2 {
+            margin: 0;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+        }
 
-      .navbar .container {
-        gap: 18px;
-      }
+        .search-box {
+            width: min(100%, 270px);
+        }
 
-      .nav-links {
-        gap: 14px;
-      }
+        .table-responsive {
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
 
-      .content-panel {
-        padding: 20px;
-      }
+        .table {
+            margin: 0;
+            color: var(--text);
+            vertical-align: middle;
+            --bs-table-bg: transparent;
+            --bs-table-color: var(--text);
+            --bs-table-border-color: var(--border);
+            --bs-table-hover-bg: rgba(188, 98, 88, .045);
+            --bs-table-hover-color: var(--text);
+        }
 
-      .search-wrapper {
-        max-width: 100%;
-      }
+        .table thead th {
+            padding: 15px 18px;
+            color: var(--muted);
+            background: #141412;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
 
-      .table thead th,
-      .table tbody td {
-        padding: 12px;
-      }
-    }
+        .table tbody td {
+            padding: 16px 18px;
+            font-size: .86rem;
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-  </style>
+        .table tbody tr {
+            transition: background .2s;
+        }
+
+        .table tbody tr:hover {
+            --bs-table-bg: rgba(188, 98, 88, .045);
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .table .form-control {
+            min-width: 120px;
+        }
+
+        /* Botões de ação da tabela (gerados pelo js/agendamentos.js) */
+
+        .table tbody td:last-child {
+            white-space: nowrap;
+        }
+
+        .table .btn {
+            padding: 6px 11px;
+            border-radius: 3px;
+            font-size: .74rem;
+            font-weight: 600;
+            line-height: 1.3;
+            white-space: nowrap;
+            transition: all .2s;
+        }
+
+        .table .btn + .btn {
+            margin-left: 4px;
+        }
+
+        .table .btn-warning {
+            color: #17130e;
+            background: #c49a55;
+            border-color: #c49a55;
+        }
+
+        .table .btn-warning:hover {
+            color: #17130e;
+            background: #d6b16f;
+            border-color: #d6b16f;
+            transform: translateY(-1px);
+        }
+
+        .table .btn-danger {
+            color: white;
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .table .btn-danger:hover {
+            color: white;
+            background: var(--red-light);
+            border-color: var(--red-light);
+            transform: translateY(-1px);
+        }
+
+        /* Status */
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-size: .72rem;
+            white-space: nowrap;
+        }
+
+        .status-pendente {
+            color: #dfbb77;
+            background: rgba(181, 139, 66, .12);
+            border-color: rgba(181, 139, 66, .4);
+        }
+
+        .status-confirmado {
+            color: #8dc6a5;
+            background: rgba(62, 130, 97, .12);
+            border-color: rgba(62, 130, 97, .4);
+        }
+
+        .status-concluido {
+            color: #d0cbc1;
+            background: rgba(120, 120, 120, .12);
+            border-color: #50504a;
+        }
+
+        .status-cancelado {
+            color: #e28a81;
+            background: rgba(143, 57, 53, .15);
+            border-color: rgba(143, 57, 53, .5);
+        }
+
+        /* Rodapé */
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 22px;
+            color: #77736b;
+            font-size: .73rem;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar > .container {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 8px 9px;
+                font-size: .75rem;
+            }
+
+            .page-content {
+                padding-top: 32px;
+            }
+
+            .page-heading {
+                align-items: flex-start;
+            }
+
+            .section-index {
+                font-size: 2.8rem;
+            }
+
+            .content-panel {
+                padding: 20px;
+            }
+
+            .page-footer {
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <nav class="navbar">
-    <div class="container">
-      <a class="navbar-brand" href="clientes.html">
-        <span class="brand-symbol">朱</span>AKEMI STUDIO.
-      </a>
+    <header class="topbar">
+        <nav class="navbar">
+            <div class="container">
 
-      <div class="nav-links">
-        <a href="clientes.html">Clientes</a>
-        <a href="senioridade.html">Senioridade</a>
-        <a href="estilos.html">Estilos</a>
-        <a href="tatuadores.html">Tatuadores</a>
-        <a href="agendamentos.html" class="active">Agendamentos</a>
-        <button onclick="sair()" class="btn btn-exit">Sair ↗</button>
-      </div>
-    </div>
-  </nav>
+                <a class="navbar-brand" href="index.html">
+                    <span class="brand-symbol">朱</span>
+                    <span>AKEMI <span class="brand-studio">STUDIO.</span></span>
+                </a>
 
-  <main class="container">
+                <div class="nav-links">
+                    <a href="clientes.html">Clientes</a>
+                    <a href="senioridade.html">Senioridade</a>
+                    <a href="estilos.html">Estilos</a>
+                    <a href="tatuadores.html">Tatuadores</a>
+                    <a href="agendamentos.html" class="active" aria-current="page">Agendamentos</a>
+                    <button onclick="sair()" class="btn-logout">Sair ↗</button>
+                </div>
 
-    <div class="eyebrow">Organização do estúdio</div>
-    <h1>Agendamentos</h1>
-    <p class="page-description">
-      Organize sessões, acompanhe os horários e gerencie os desenhos aprovados.
-    </p>
+            </div>
+        </nav>
+    </header>
 
-    <section class="content-panel">
-      <h2 class="section-heading">Novo agendamento</h2>
-      <p class="section-description">
-        Defina o cliente, o tatuador e os detalhes da sessão.
-      </p>
+    <main class="page-content">
 
-      <form id="form-agendamento" class="row g-3 align-items-end">
+        <div class="page-heading">
+            <div>
+                <div class="breadcrumb-text">
+                    Painel administrativo / <span>Agendamentos</span>
+                </div>
 
-        <div class="col-md-6 col-lg-3">
-          <label for="idcliente" class="form-label">Cliente</label>
-          <select id="idcliente" class="form-select" required>
-            <option value="">Selecione um cliente...</option>
-          </select>
+                <div class="eyebrow">Organização do estúdio</div>
+
+                <h1>Agendamentos</h1>
+
+                <p class="heading-description">
+                    Organize sessões, acompanhe os horários e gerencie os desenhos aprovados.
+                </p>
+            </div>
+
+            <div class="section-index" aria-hidden="true">05</div>
         </div>
 
-        <div class="col-md-6 col-lg-3">
-          <label for="idtatuador" class="form-label">Tatuador</label>
-          <select id="idtatuador" class="form-select" required>
-            <option value="">Selecione um tatuador...</option>
-          </select>
-        </div>
+        <!-- Cadastro -->
 
-        <div class="col-md-6 col-lg-2">
-          <label for="dataagendamento" class="form-label">Data</label>
-          <input type="date" id="dataagendamento" class="form-control" required>
-        </div>
+        <section class="content-panel">
+            <div class="panel-heading">
+                <div class="panel-icon" aria-hidden="true">＋</div>
 
-        <div class="col-md-6 col-lg-2">
-          <label for="horaagendamento" class="form-label">Horário</label>
-          <input type="time" id="horaagendamento" class="form-control" required>
-        </div>
+                <div>
+                    <h2>Novo agendamento</h2>
+                    <p>Defina o cliente, o tatuador e os detalhes da sessão.</p>
+                </div>
+            </div>
 
-        <div class="col-md-6 col-lg-2">
-          <label for="valortatuagem" class="form-label">Valor (R$)</label>
-          <input
-            type="number"
-            id="valortatuagem"
-            class="form-control"
-            placeholder="0,00"
-            step="0.01"
-            min="0"
-          >
-        </div>
+            <form id="form-agendamento" class="row g-3 align-items-end">
 
-        <div class="col-12">
-          <label for="descricaotatuagem" class="form-label">Descrição da tatuagem</label>
-          <textarea
-            id="descricaotatuagem"
-            class="form-control"
-            placeholder="Descreva a ideia, o tamanho, a região do corpo ou outras observações..."
-          ></textarea>
-        </div>
+                <div class="col-md-6 col-lg-3">
+                    <label for="idcliente" class="form-label">Cliente</label>
+                    <select id="idcliente" class="form-select" required>
+                        <option value="">Selecione um cliente...</option>
+                    </select>
+                </div>
 
-        <div class="col-md-8" id="campo-desenho">
-          <label for="desenho" class="form-label">Desenho aprovado</label>
-          <input
-            type="file"
-            id="desenho"
-            class="form-control"
-            accept="image/*"
-          >
-          <small class="d-block mt-2" style="color: var(--muted);">
-            Selecione uma imagem de referência ou do desenho aprovado.
-          </small>
-        </div>
+                <div class="col-md-6 col-lg-3">
+                    <label for="idtatuador" class="form-label">Tatuador</label>
+                    <select id="idtatuador" class="form-select" required>
+                        <option value="">Selecione um tatuador...</option>
+                    </select>
+                </div>
 
-        <div class="col-md-4" id="bloco-status" style="display: none;">
-          <label for="status" class="form-label">Status do agendamento</label>
-          <select id="status" class="form-select">
-            <option value="pendente">Pendente</option>
-            <option value="confirmado">Confirmado</option>
-            <option value="concluido">Concluído</option>
-            <option value="cancelado">Cancelado</option>
-          </select>
-        </div>
+                <div class="col-md-6 col-lg-2">
+                    <label for="dataagendamento" class="form-label">Data</label>
+                    <input
+                        type="date"
+                        id="dataagendamento"
+                        class="form-control"
+                        required>
+                </div>
 
-        <div class="col-12 d-flex flex-wrap gap-2 mt-4">
-          <button id="btn-submit-agendamento" type="submit" class="btn btn-akemi">
-            Cadastrar agendamento
-          </button>
-        </div>
+                <div class="col-md-6 col-lg-2">
+                    <label for="horaagendamento" class="form-label">Horário</label>
+                    <input
+                        type="time"
+                        id="horaagendamento"
+                        class="form-control"
+                        required>
+                </div>
 
-      </form>
-    </section>
+                <div class="col-md-6 col-lg-2">
+                    <label for="valortatuagem" class="form-label">Valor (R$)</label>
+                    <input
+                        type="number"
+                        id="valortatuagem"
+                        class="form-control"
+                        placeholder="0,00"
+                        step="0.01"
+                        min="0">
+                </div>
 
-    <section class="content-panel">
+                <div class="col-12">
+                    <label for="descricaotatuagem" class="form-label">
+                        Descrição da tatuagem
+                    </label>
 
-      <div class="d-flex justify-content-between align-items-md-center flex-column flex-md-row gap-3 mb-4">
-        <div>
-          <h2 class="section-heading">Agenda do estúdio</h2>
-          <p class="section-description mb-0">
-            Consulte e gerencie os agendamentos registrados.
-          </p>
-        </div>
+                    <textarea
+                        id="descricaotatuagem"
+                        class="form-control"
+                        placeholder="Descreva a ideia, o tamanho, a região do corpo ou outras observações..."></textarea>
+                </div>
 
-        <div class="search-wrapper">
-          <span class="search-icon">⌕</span>
-          <input
-            type="search"
-            id="buscarAgendamento"
-            class="form-control"
-            placeholder="Buscar agendamento..."
-            aria-label="Buscar agendamento"
-          >
-        </div>
-      </div>
+                <div class="col-md-8" id="campo-desenho">
+                    <label for="desenho" class="form-label">Desenho aprovado</label>
+                    <input
+                        type="file"
+                        id="desenho"
+                        class="form-control"
+                        accept="image/*">
 
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Tatuador</th>
-              <th scope="col">Data</th>
-              <th scope="col">Hora</th>
-              <th scope="col">Valor</th>
-              <th scope="col">Status</th>
-              <th scope="col">Desenho</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
+                    <small class="form-hint">
+                        Selecione uma imagem de referência ou do desenho aprovado.
+                    </small>
+                </div>
 
-          <tbody id="corpo-tabela">
-            <!-- Os agendamentos são carregados pelo JavaScript -->
-          </tbody>
-        </table>
-      </div>
+                <div class="col-md-4" id="bloco-status" style="display: none;">
+                    <label for="status" class="form-label">Status do agendamento</label>
+                    <select id="status" class="form-select">
+                        <option value="pendente">Pendente</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="concluido">Concluído</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
 
-    </section>
+                <div class="col-12 d-flex flex-wrap gap-2 mt-4">
+                    <button
+                        id="btn-submit-agendamento"
+                        type="submit"
+                        class="btn btn-akemi btn-primary-custom">
+                        ＋ Cadastrar agendamento
+                    </button>
+                </div>
 
-    <footer class="d-flex justify-content-between flex-wrap gap-2">
-      <span>AKEMI STUDIO. — Gestão do estúdio</span>
-      <span id="anoAtual"></span>
-    </footer>
+            </form>
+        </section>
 
-  </main>
+        <!-- Lista -->
 
-  <script src="js/auth.js"></script>
-  <script src="js/agendamentos.js"></script>
+        <section class="content-panel">
 
-  <script>
-    // Filtra as linhas já carregadas pelo agendamentos.js.
-    const campoBusca = document.getElementById('buscarAgendamento');
+            <div class="table-toolbar">
+                <div class="panel-heading mb-0">
+                    <div class="panel-icon" aria-hidden="true">≡</div>
 
-    campoBusca.addEventListener('input', function () {
-      const termo = this.value.trim().toLocaleLowerCase('pt-BR');
+                    <div>
+                        <h2>Agenda do estúdio</h2>
+                        <p>Consulte e gerencie os agendamentos registrados.</p>
+                    </div>
+                </div>
 
-      document.querySelectorAll('#corpo-tabela tr').forEach(function (linha) {
-        linha.hidden = !linha.textContent
-          .toLocaleLowerCase('pt-BR')
-          .includes(termo);
-      });
-    });
+                <div class="search-box">
+                    <input
+                        type="search"
+                        id="buscarAgendamento"
+                        class="form-control"
+                        placeholder="Buscar por cliente, tatuador ou ID..."
+                        aria-label="Buscar agendamento">
+                </div>
+            </div>
 
-    document.getElementById('anoAtual').textContent =
-      '© ' + new Date().getFullYear();
-  </script>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Tatuador</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Desenho</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="corpo-tabela">
+                        <!-- Preenchido por js/agendamentos.js -->
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            <span>© <span id="anoAtual"></span> Akemi Studio</span>
+            <span>Arte, identidade e precisão.</span>
+        </footer>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/agendamentos.js"></script>
+
+    <script>
+        document.getElementById("anoAtual").textContent =
+            new Date().getFullYear();
+
+        // Filtro visual da tabela sem interferir no cadastro ou na API.
+        const busca = document.getElementById("buscarAgendamento");
+
+        busca.addEventListener("input", () => {
+            const termo = busca.value.trim().toLocaleLowerCase("pt-BR");
+            const linhas = document.querySelectorAll("#corpo-tabela tr");
+
+            linhas.forEach(linha => {
+                const corresponde = linha.textContent
+                    .toLocaleLowerCase("pt-BR")
+                    .includes(termo);
+
+                linha.hidden = !corresponde;
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -3,13 +3,226 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Cadastro — Estúdio de Tatuagem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro — AKEMI STUDIO</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+
+
+
+  /* ========================================
+  AKEMI STUDIO — TELA DE CADASTRO
+  ======================================== */
+
+  @import
+  url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+  :root {
+  --bg: #111110;
+  --panel: #191917;
+  --input-bg: #121211;
+  --border: #35312c;
+  --text: #eee9df;
+  --muted: #aaa49a;
+  --red: #8f3935;
+  --red-hover: #a84942;
+  }
+
+  /* Base da página */
+  * {
+  box-sizing: border-box;
+  }
+
+  body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 60px 24px !important;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background:
+  radial-gradient(
+  ellipse at top,
+  rgba(143, 57, 53, 0.10),
+  transparent 55%
+  ),
+  var(--bg);
+
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Painel principal */
+  body > h1,
+  body > form,
+  body > p {
+  width: 100%;
+  max-width: 460px;
+  }
+
+  body > h1 {
+  margin: 0 auto 28px !important;
+  padding-top: 28px;
+
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-align: center;
+  }
+
+  /* Detalhe decorativo acima do título */
+  body > h1::before {
+  content: '朱';
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+
+  background: var(--red);
+  color: #fff8ef;
+
+  font-family: serif;
+  font-size: 28px;
+  line-height: 48px;
+  text-align: center;
+  }
+
+  /* Formulário */
+  #form-cadastro {
+  max-width: 460px;
+  padding: 34px;
+
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Campos */
+  #form-cadastro .form-control {
+  min-height: 52px;
+  padding: 14px 16px;
+
+  background-color: var(--input-bg);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 3px;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+
+  transition:
+  border-color 0.2s ease,
+  box-shadow 0.2s ease,
+  background-color 0.2s ease;
+  }
+
+  #form-cadastro .form-control::placeholder {
+  color: #827c73;
+  opacity: 1;
+  }
+
+  #form-cadastro .form-control:hover {
+  border-color: #5a4940;
+  }
+
+  #form-cadastro .form-control:focus {
+  background-color: #171614;
+  color: var(--text);
+  border-color: var(--red);
+
+  box-shadow: 0 0 0 3px rgba(143, 57, 53, 0.18);
+  outline: none;
+  }
+
+  /* Botão de cadastro */
+  #form-cadastro .btn-primary {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 8px;
+
+  background: var(--red);
+  color: #fff8ef;
+
+  border: 1px solid var(--red);
+  border-radius: 3px;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  transition:
+  background-color 0.2s ease,
+  border-color 0.2s ease,
+  transform 0.2s ease;
+  }
+
+  #form-cadastro .btn-primary:hover {
+  background: var(--red-hover);
+  border-color: var(--red-hover);
+  transform: translateY(-2px);
+  }
+
+  #form-cadastro .btn-primary:active {
+  transform: translateY(0);
+  }
+
+  /* Link para entrar */
+  body > p {
+  margin: 24px auto 0 !important;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  }
+
+  body > p a {
+  color: #d18479;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+  }
+
+  body > p a:hover {
+  color: #f0b0a5;
+  text-decoration: underline;
+  }
+
+  /* Seleção de texto */
+  ::selection {
+  background: var(--red);
+  color: #fff;
+  }
+
+  /* Responsividade */
+  @media (max-width: 520px) {
+  body {
+  padding: 32px 18px !important;
+  }
+
+  #form-cadastro {
+  padding: 24px 20px;
+  }
+
+  body > h1 {
+  font-size: 2.2rem;
+  }
+  }
+  </style>
 </head>
 
 <body class="container py-5" style="max-width: 480px;">
 
-  
+
 
   <h1 class="mb-4">Criar conta</h1>
 
@@ -31,7 +244,7 @@
   </p>
 
   <script src="js/auth.js"></script>
-  <script src="js/cadastro.js"></script> 
+  <script src="js/cadastro.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/clientes.js"></script>
   <script src="js/cadastro.js"></script>

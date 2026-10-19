@@ -47,6 +47,7 @@ carregarClientes()
 carregarTatuadores()
 
 // ─── Carrega a lista de agendamentos ao abrir a página ───
+// ─── Carrega a lista de agendamentos ao abrir a página ───
 async function listarAgendamentos() {
   const resposta = await fetchAutenticado(`${API}/agendamentos`)
   const agendamentos = await resposta.json()
@@ -55,6 +56,11 @@ async function listarAgendamentos() {
   corpo.innerHTML = ''
 
   agendamentos.forEach(a => {
+    // se existir um desenho salvo, monta uma miniatura; senão, mostra "-"
+    const imagemHtml = a.desenhoaprovado
+      ? `<img src="${API}/uploads/${a.desenhoaprovado}" style="max-width: 60px; max-height: 60px;">`
+      : '-'
+
     corpo.innerHTML += `
       <tr>
         <td>${a.idagendamento}</td>
@@ -64,6 +70,7 @@ async function listarAgendamentos() {
         <td>${a.horaagendamento}</td>
         <td>${a.valortatuagem ?? '-'}</td>
         <td>${a.status}</td>
+        <td>${imagemHtml}</td>
         <td>
           <button class="btn btn-sm btn-warning me-2" onclick='preencherFormularioEdicao(${JSON.stringify(a)})'>Editar</button>
           <button class="btn btn-sm btn-danger" onclick="deletarAgendamento(${a.idagendamento})">Excluir</button>
@@ -71,6 +78,8 @@ async function listarAgendamentos() {
       </tr>`
   })
 }
+
+listarAgendamentos()
 
 listarAgendamentos()
 
